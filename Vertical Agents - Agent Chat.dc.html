@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F4F5F6;font-family:Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+*{box-sizing:border-box;}
+h1,h2,h3,h4,h5,h6{font-family:Inter,Arial,sans-serif;font-weight:500;}
+a{color:#0052F2;text-decoration:none;}
+a:hover{color:#0C3FA7;text-decoration:underline;}
+button{font-family:inherit;}
+@keyframes ovIn{from{opacity:0}to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes mdIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+<div style="display:flex;min-height:100vh;background:#F4F5F6;color:#1E2024;font-size:14px;">
+
+  <aside style="width:250px;flex:0 0 250px;background:#F4F5F6;padding:20px 16px;display:flex;flex-direction:column;gap:22px;height:100vh;position:sticky;top:0;overflow-y:auto;overflow-x:hidden;">
+    <div style="display:flex;align-items:center;gap:10px;padding:0 8px;">
+      <span style="width:26px;height:26px;flex:0 0 26px;border-radius:7px;background:#0052F2;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;line-height:1;">A</span>
+      <span style="font-size:20px;font-weight:600;letter-spacing:-0.01em;white-space:nowrap;">Acme Store</span>
+    </div>
+    <nav style="display:flex;flex-direction:column;gap:2px;">
+
+      <div onClick="{{ goNew }}" style="{{ newNavStyle }}">
+<span style="width:26px;height:26px;flex:0 0 26px;display:flex;align-items:center;justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path></svg></span>
+        <span>Home</span>
+      </div>
+      <div onClick="{{ goCart }}" style="{{ cartNavStyle }}">
+<span style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span>
+        <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;">Purchase Funnel Optimizer</span>
+      </div>
+      <div onClick="{{ goPD }}" style="{{ pdNavStyle }}">
+<span style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span>
+        <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;">Product Discovery Agent</span>
+      </div>
+    </nav>
+    <div style="margin-top:auto;display:flex;">
+      <a href="#" style="flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 12px; color: #1E2024; font-size: 13px; font-weight: 500; text-decoration: none; cursor: pointer" style-hover="background:#DEDFE2;">
+        <span style="white-space:nowrap;">Classic Analytics Environment</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"></path></svg>
+      </a>
+    </div>
+  </aside>
+
+  <main style="flex:1;min-width:0;background:#FFFFFF;border-radius:14px 0 0 14px;border:1px solid #DEDFE2;border-right:none;padding:26px 34px 60px;">
+    <sc-if value="{{ notChat }}">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#8A8E99;min-width:0;overflow:hidden;white-space:nowrap;">
+        <sc-if value="{{ isNew }}"><span style="display:inline-flex;align-items:center;gap:7px;color:#8A8E99;"><span style="width:22px;height:22px;flex:0 0 22px;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path></svg></span>Home</span></sc-if>
+        <sc-if value="{{ notNew }}"><a href="#" onClick="{{ goAgents }}" style="color:#8A8E99;display:inline-flex;align-items:center;gap:7px;flex-shrink:0;"><sc-if value="{{ isPFO }}"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>{{ agentName }}</a></sc-if>
+        <sc-if value="{{ isReport0 }}"><span>/</span><span style="color:#1E2024;min-width:0;overflow:hidden;text-overflow:ellipsis;">Fix in-stock Toys shown as "Not available" at checkout</span></sc-if>
+        <sc-if value="{{ isReportX }}"><span>/</span><span style="color:#1E2024;min-width:0;overflow:hidden;text-overflow:ellipsis;">{{ opp.title }}</span></sc-if>
+      </div>
+      <sc-if value="{{ isReport }}">
+        <div style="position:relative;flex-shrink:0;">
+          <button onClick="{{ toggleAction }}" style="display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:#0052F2;border:none;border-radius:8px;padding:8px 14px;font-size:14px;font-weight:500;color:#fff;cursor:pointer;font-family:inherit;" style-hover="background:#0C3FA7;">Action<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <sc-if value="{{ actionOpen }}">
+            <div style="position:absolute;right:0;top:calc(100% + 6px);z-index:30;background:#fff;border:1px solid #DEDFE2;border-radius:10px;box-shadow:0 8px 24px rgba(30,32,36,0.12);padding:6px;display:flex;flex-direction:column;min-width:220px;">
+              <sc-if value="{{ isLaunch }}">
+                <div onClick="{{ closeAction }}" style="padding:9px 12px;border-radius:7px;font-size:14px;font-weight:500;color:#0052F2;cursor:pointer;white-space:nowrap;" style-hover="background:#EEF3FD;">{{ launchLabel }}</div>
+                <div style="height:1px;background:#DEDFE2;margin:4px 0;"></div>
+              </sc-if>
+              <div onClick="{{ closeAction }}" style="padding:9px 12px;border-radius:7px;font-size:14px;color:#1E2024;cursor:pointer;white-space:nowrap;" style-hover="background:#F4F5F6;">Create Linear ticket</div>
+              <div onClick="{{ closeAction }}" style="padding:9px 12px;border-radius:7px;font-size:14px;color:#1E2024;cursor:pointer;white-space:nowrap;" style-hover="background:#F4F5F6;">Hand off to Coding Agent</div>
+              <div style="height:1px;background:#DEDFE2;margin:4px 0;"></div>
+              <div onClick="{{ closeAction }}" style="padding:9px 12px;border-radius:7px;font-size:14px;color:#5A5E68;cursor:pointer;white-space:nowrap;" style-hover="background:#F4F5F6;">Archive</div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isNew }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:760px;margin:0 auto;padding:72px 0 40px;display:flex;flex-direction:column;gap:26px;">
+      <h1 style="margin:0;font-size:32px;font-weight:500;letter-spacing:-0.02em;">Hi, how can I help you today?</h1>
+      <div style="display:flex;align-items:center;gap:10px;border:1px solid #C2C4CA;border-radius:999px;background:#fff;padding:6px 6px 6px 8px;box-shadow:0 1px 3px rgba(16,18,21,0.04);">
+        <span title="Attach data" style="width:32px;height:32px;flex:0 0 32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#5A5E68;cursor:pointer;" style-hover="background:#F4F5F6;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>
+        <input value="{{ draft }}" onChange="{{ onDraft }}" placeholder="Ask anything about your data or agents…" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+        <button style="width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#0052F2;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:#0C3FA7;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px;">
+        <div style="font-size:14px;font-weight:500;color:#5A5E68;">Top opportunities from your agents</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div onClick="{{ goReport }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(16,18,21,0.06);">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5A5E68;flex:1;min-width:0;"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span><span>Purchase Funnel Optimizer</span></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg></div>
+            <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Fix in-stock Toys shown as "Not available" at checkout, which caused a 45% to 60% spike in Toys cart abandonment</div>
+            <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;"><span style="font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$38k/mo</span><span style="font-size:12px;color:#8A8E99;">est. impact</span></div>
+          </div>
+          <div onClick="{{ goCart }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(16,18,21,0.06);">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5A5E68;flex:1;min-width:0;"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span><span>Purchase Funnel Optimizer</span></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg></div>
+            <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Test free shipping vs. 10% off to find which checkout offer drives the most net revenue</div>
+            <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;"><span style="font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$24k/mo</span><span style="font-size:12px;color:#8A8E99;">est. impact</span></div>
+          </div>
+          <div onClick="{{ goOpp9 }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(16,18,21,0.06);">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5A5E68;flex:1;min-width:0;"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span><span>Product Discovery</span></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg></div>
+            <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Searches for "legos" return no results because plurals aren't matched</div>
+            <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;"><span style="font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$19k/mo</span><span style="font-size:12px;color:#8A8E99;">est. impact</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isChat }}">
+    <div style="position:fixed;right:20px;bottom:20px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+      <div style="display:flex;align-items:center;gap:4px;background:#fff;border:1px solid #DEDFE2;border-radius:999px;padding:4px;box-shadow:0 4px 16px rgba(30,32,36,0.10);">
+        <a href="Vertical Agents.dc.html{{ agentHash }}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:#35373D;white-space:nowrap;text-decoration:none;cursor:pointer;" style-hover="background:#F4F5F6;">Option A</a>
+        <span style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;background:#1E2024;color:#fff;white-space:nowrap;text-decoration:none;">Option B</span>
+        <a href="Vertical Agents C.dc.html{{ agentHash }}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:#35373D;white-space:nowrap;text-decoration:none;cursor:pointer;" style-hover="background:#F4F5F6;">Option C</a>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ isChat }}">
+    <div style="{{ chatGridStyle }}">
+      <div style="display:flex;flex-direction:column;min-width:0;padding:20px 24px 24px;position:relative;">
+        <div style="position:absolute;top:20px;left:24px;z-index:20;">
+          <sc-if value="{{ chatsClosed }}" hint-placeholder-val="{{ true }}">
+            <span onClick="{{ toggleChats }}" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border-radius:999px;height:42px;box-sizing:border-box;padding:0 16px 0 12px;font-size:14px;font-weight:500;color:#1E2024;cursor:pointer;white-space:nowrap;box-shadow:0 2px 10px rgba(30,32,36,0.10);" style-hover="box-shadow:0 4px 14px rgba(30,32,36,0.14);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>Activities</span>
+          </sc-if>
+          <sc-if value="{{ chatsOpen }}">
+            <div style="width:340px;background:#fff;border:1px solid #DEDFE2;border-radius:16px;box-shadow:0 12px 32px rgba(30,32,36,0.14);padding:12px;display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="flex:1;min-width:0;display:flex;align-items:center;gap:8px;border:1px solid #C2C4CA;border-radius:999px;padding:8px 12px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+                  <input placeholder="Search" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+                </div>
+                <span onClick="{{ toggleChats }}" title="Close" style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#5A5E68;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
+              </div>
+              <sc-for list="{{ actDays }}" as="d" hint-placeholder-count="5">
+              <div onClick="{{ closeChats }}" style="{{ d.rowStyle }}" style-hover="background:#F4F5F6;"><span style="flex:1;min-width:0;line-height:1.4;text-wrap:pretty;">{{ d.desc }}</span><span style="flex-shrink:0;font-size:12px;font-weight:400;color:#8A8E99;white-space:nowrap;line-height:1.6;">{{ d.day }}</span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <span onClick="{{ togglePanel }}" style="{{ pillStyle }}" style-hover="background:#F4F5F6;"><sc-if value="{{ isPFO }}"><span style="width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>{{ agentName }}</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:24px 0;max-width:760px;width:100%;margin:0 auto;">
+          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Today</div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">Here is today's update to your Opportunities and Goals</div>
+          <sc-if value="{{ isPFO }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+        <div onClick="{{ goReport }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="background:#FAE2E2;color:#B41823;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;">Spike detected</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Fix in-stock Toys shown as "Not available at checkout", which caused 45% to 60% spike in cart abandonment for the Toys category</div>
+                    <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+            <span style="font-family:Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$38k/mo</span>
+            <span style="font-size:12px;color:#8A8E99;">est. impact</span>
+          </div>
+        </div>
+        <div onClick="{{ goOpp6 }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="background:#EEF3FD;color:#0052F2;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;">A/B Testing</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Test free shipping vs. 10% off to determine which checkout offer drives the strongest overall lift in net revenue.</div>
+          <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+            <span style="font-family:Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$24k/mo</span>
+            <span style="font-size:12px;color:#8A8E99;">est. impact</span>
+          </div>
+        </div>
+        <div onClick="{{ goOpp4 }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="background:#DEDFF7;color:#474BC3;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;">Personalization</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Personalize among free shipping, 10% off, loyalty points and no offer for each shopper.</div>
+          <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+            <span style="font-family:Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$41k/mo</span>
+            <span style="font-size:12px;color:#8A8E99;">est. impact</span>
+          </div>
+        </div>
+          </div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">{{ kpiSummary }}</div>
+          <div style="border:1px solid #DEDFE2;border-radius:12px;background:#fff;padding:16px 18px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px 16px;">
+              <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:4px;min-width:0;">
+                <div style="font-size:12px;color:#5A5E68;line-height:1.35;white-space:nowrap;">{{ k.l }}</div>
+                <div style="font-size:18px;font-weight:600;color:#1E2024;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;">{{ k.v }}</div>
+                <div style="{{ k.dStyle }}">{{ k.dl }}</div>
+              </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">Open each opportunity to see the evidence and plan, or ask me a follow-up.</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Where are we losing checkout conversions?</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Cart abandonment by SKU category</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Generate more opportunities</div>
+          </div>
+          </sc-if>
+          <sc-if value="{{ isPD }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ pdCards }}" as="c" hint-placeholder-count="3">
+            <div onClick="{{ c.go }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <span style="{{ c.badgeStyle }}">{{ c.badge }}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+              </div>
+              <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">{{ c.title }}</div>
+              <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+                <span style="font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">{{ c.impact }}</span>
+                <span style="font-size:12px;color:#8A8E99;">est. impact</span>
+              </div>
+            </div>
+            </sc-for>
+          </div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">{{ kpiSummary }}</div>
+          <div style="border:1px solid #DEDFE2;border-radius:12px;background:#fff;padding:16px 18px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px 16px;">
+              <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:4px;min-width:0;">
+                <div style="font-size:12px;color:#5A5E68;line-height:1.35;white-space:nowrap;">{{ k.l }}</div>
+                <div style="font-size:18px;font-weight:600;color:#1E2024;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;">{{ k.v }}</div>
+                <div style="{{ k.dStyle }}">{{ k.dl }}</div>
+              </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">Open each opportunity to see the evidence and plan, or ask me a follow-up.</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Which searches return no results?</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Banner click-through this week</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Generate more opportunities</div>
+          </div>
+          </sc-if>
+        </div>
+        <div style="position:sticky;bottom:16px;max-width:760px;width:100%;margin:0 auto;display:flex;align-items:center;gap:10px;border:1px solid #C2C4CA;border-radius:999px;background:#fff;padding:8px 8px 8px 10px;box-shadow:0 2px 10px rgba(30,32,36,0.06);">
+          <span style="width:34px;height:34px;border-radius:50%;border:1px solid #DEDFE2;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#35373D;flex:0 0 34px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>
+          <input value="{{ draft }}" onChange="{{ onDraft }}" placeholder="Message {{ agentName }}" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+          <button style="width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:#0052F2;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:#0C3FA7;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button>
+        </div>
+      </div>
+      <sc-if value="{{ panelOpen }}">
+      <aside style="position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;min-width:0;border-left:1px solid #DEDFE2;background:#FFFFFF;padding:16px 24px 32px;display:flex;flex-direction:column;gap:22px;">
+        <span onClick="{{ togglePanel }}" title="Close" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid #DEDFE2;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#35373D;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+          <sc-if value="{{ isPFO }}"><span style="width:72px;height:72px;flex:0 0 72px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:72px;height:72px;flex:0 0 72px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>
+          <div style="font-size:18px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin-top:6px;text-wrap:balance;">{{ agentName }}</div>
+          <div style="font-size:12px;color:#5A5E68;">By Jingshu Zhao · Monitors hourly</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5A5E68;">
+            <span style="display:flex;align-items:center;"><span style="width:24px;height:24px;border-radius:50%;background:#EEF3FD;color:#0052F2;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;">JZ</span><span style="width:24px;height:24px;border-radius:50%;background:#DEDFF7;color:#474BC3;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">MR</span><span style="width:24px;height:24px;border-radius:50%;background:#FAE2E2;color:#B41823;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">AK</span><span style="width:24px;height:24px;border-radius:50%;background:#DEDFE2;color:#5A5E68;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">+2</span></span>
+            <span>5 collaborators</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:2px;background:#F4F5F6;border-radius:999px;padding:4px;">
+            <sc-if value="{{ tabGoalOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">Goal</span></sc-if>
+            <sc-if value="{{ tabGoalOff }}"><span onClick="{{ setTabGoal }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">Goal</span></sc-if>
+            <sc-if value="{{ tabAboutOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">About</span></sc-if>
+            <sc-if value="{{ tabAboutOff }}"><span onClick="{{ setTabAbout }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">About</span></sc-if>
+            <sc-if value="{{ tabArtOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">Artifacts</span></sc-if>
+            <sc-if value="{{ tabArtOff }}"><span onClick="{{ setTabArt }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">Artifacts</span></sc-if>
+        </div>
+        <sc-if value="{{ tabGoalOn }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;color:#5A5E68;line-height:1.5;">{{ agentGoal }}</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#fff;border:1px solid #DEDFE2;border-radius:10px;">
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+              <div style="font-size:12px;color:#5A5E68;">{{ k.l }}</div>
+              <div style="{{ k.dStyle }}">{{ k.dl }}</div>
+            </div>
+            <div style="font-size:16px;font-weight:600;color:#1E2024;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ k.v }}</div>
+          </div>
+          </sc-for>
+        </div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ tabArtOn }}">
+        <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.a }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.as }}</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.b }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.bs }}</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.c }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.cs }}</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="4"></circle><circle cx="16" cy="15" r="4"></circle></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.d }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.ds }}</div>
+            </div>
+          </div>
+          <div style="padding:10px 8px;font-size:12px;font-weight:500;color:#0052F2;cursor:pointer;">View all 14 artifacts</div>
+        </div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ tabAboutOn }}">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Schedule</div>
+          <div style="font-size:14px;color:#35373D;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;"><span>Daily 9:00am PST</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Instruction</div>
+          <div style="font-size:14px;line-height:1.7;color:#35373D;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:12px 14px;text-wrap:pretty;"><sc-if value="{{ isPFO }}"><div style="display:flex;flex-direction:column;gap:8px;"><div>Find opportunities across the purchase funnel, from <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">View Product Detail</code> to <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Add to Cart</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Checkout</code> and <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Complete Purchase</code>.</div><div>Look for opportunities at the product level (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.category</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.item</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.id</code>), at the page level (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">page.url</code>), and in any feature related to the checkout flow.</div><div>Recommend fixes, experiments and personalization.</div><div>Send a daily update to the Slack channel <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">#funnel-tiger-team</code>.</div></div></sc-if><sc-if value="{{ isPD }}"><div style="display:flex;flex-direction:column;gap:8px;"><div>Monitor the goals and the purchase funnel, from <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">View Product Detail</code> to <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Add to Cart</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Checkout</code> and <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Complete Purchase</code>.</div><div>Find opportunities in search terms (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">search term</code>), homepage banners (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">banner</code>) and landing pages (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">entry page url</code>).</div><div>Identify the best ways for shoppers to discover a product and complete the purchase funnel, and recommend fixes, experiments and personalization.</div><div>Send a daily update to the Slack channel <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">#discovery-tiger-team</code>.</div></div></sc-if></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <div style="font-size:12px;font-weight:500;color:#8A8E99;">Skills</div>
+            <label title="Upload a skill file" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;color:#5A5E68;cursor:pointer;border-radius:6px;" style-hover="background:#F4F5F6;color:#1E2024;">
+              <input type="file" multiple accept=".md,.txt,.zip" onChange="{{ onSkills }}" style="display:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"></path></svg>
+            </label>
+          </div>
+          <sc-for list="{{ skills }}" as="k" hint-placeholder-count="0">
+            <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:10px 12px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path></svg>
+              <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ k.name }}</span>
+              <span onClick="{{ k.remove }}" title="Remove" style="width:24px;height:24px;flex:0 0 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#8A8E99;" style-hover="background:#F4F5F6;color:#1E2024;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
+            </div>
+          </sc-for>
+        </div>
+        </div>
+        </sc-if>
+      </aside>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isReportX }}">
+    <div style="max-width:840px;margin:0 auto;padding:40px 0 56px;display:flex;flex-direction:column;gap:44px;">
+      <div style="display:flex;flex-direction:column;gap:22px;padding-bottom:32px;border-bottom:1px solid #1E2024;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <span style="{{ opp.badgeStyle }}">{{ opp.badge }}</span>
+              <span style="font-size:12px;color:#8A8E99;white-space:nowrap;">{{ opp.when }}</span>
+            </div>
+            <h1 style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;text-wrap:balance;">{{ opp.title }}</h1>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:22px;">
+            <div style="font-size:32px;font-weight:600;letter-spacing:-0.02em;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ opp.impact }}</div>
+            <div style="font-size:12px;color:#5A5E68;white-space:nowrap;">{{ opp.impactLabel }}</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">{{ opp.problemTitle }}</h2>
+        <div style="display:grid;grid-template-columns:100px minmax(0,1fr);gap:20px 16px;font-size:16px;line-height:1.55;">
+          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">What</span>
+          <span style="color:#1E2024;text-wrap:pretty;">{{ opp.what }}</span>
+          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">Why</span>
+          <span style="color:#1E2024;text-wrap:pretty;">{{ opp.why }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <span onClick="{{ toggleEvidence }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#0052F2;cursor:pointer;white-space:nowrap;">
+            <sc-if value="{{ evidenceClosed }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></sc-if>
+            <sc-if value="{{ evidenceOpen }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></sc-if>
+            {{ opp.checksLabel }}
+          </span>
+          <sc-if value="{{ evidenceOpen }}">
+            <div style="display:flex;flex-direction:column;border-top:1px solid #DEDFE2;">
+              <sc-for list="{{ opp.checks }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;color:#1E2024;">
+                  <span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEF2E8;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1D804E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
+                  <span style="flex:1;min-width:0;line-height:1.5;">{{ c.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <sc-if value="{{ opp.hasKV }}">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Test design</h2>
+        <div style="display:flex;flex-direction:column;border-top:1px solid #DEDFE2;">
+          <sc-for list="{{ opp.kv }}" as="r" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;line-height:1.5;">
+              <span style="color:#5A5E68;">{{ r.k }}</span>
+              <span style="color:#1E2024;text-wrap:pretty;">{{ r.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+      <sc-if value="{{ opp.hasTable }}">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">{{ opp.tableTitle }}</h2>
+        <div style="border:1px solid #DEDFE2;border-radius:10px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:2fr 0.8fr 2fr 1fr;gap:12px;padding:10px 18px;background:#F4F5F6;border-bottom:1px solid #DEDFE2;font-size:12px;color:#8A8E99;">
+            <span>{{ opp.cols.a }}</span><span>{{ opp.cols.b }}</span><span>{{ opp.cols.c }}</span><span style="text-align:right;">{{ opp.cols.d }}</span>
+          </div>
+          <sc-for list="{{ opp.rows }}" as="r" hint-placeholder-count="4">
+            <div style="{{ r.rowStyle }}">
+              <span style="color:#1E2024;">{{ r.a }}</span>
+              <span style="color:#5A5E68;font-variant-numeric:tabular-nums;">{{ r.b }}</span>
+              <span style="color:#1E2024;font-weight:500;">{{ r.c }}</span>
+              <span style="color:#1D804E;font-weight:500;text-align:right;font-variant-numeric:tabular-nums;">{{ r.d }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Plan</h2>
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px;font-size:16px;line-height:1.5;color:#1E2024;">
+          <sc-for list="{{ opp.plan }}" as="p" hint-placeholder-count="3"><li>{{ p.text }}</li></sc-for>
+        </ol>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;">
+          <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Activity</h2>
+          <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">1 update</span>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;padding-bottom:22px;position:relative;">
+            <span style="position:absolute;left:15px;top:32px;bottom:0;width:1px;background:#DEDFE2;"></span>
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span>
+            <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;">{{ opp.agentLabel }} posted this to #ecom-alerts</span>
+            <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">{{ opp.posted }}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#F4F5F6;color:#5A5E68;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">JZ</span>
+            <div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid #DEDFE2;border-radius:10px;background:#fff;padding:8px 8px 8px 16px;">
+              <input placeholder="Comment or @mention a teammate…" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+              <span style="width:30px;height:30px;flex:0 0 30px;border-radius:7px;background:#F4F5F6;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ isReport0 }}">
+    <div style="max-width:840px;margin:0 auto;padding:40px 0 56px;display:flex;flex-direction:column;gap:44px;">
+      <div style="display:flex;flex-direction:column;gap:22px;padding-bottom:32px;border-bottom:1px solid #1E2024;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <span style="background:#FAE2E2;color:#B41823;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;">Spike detected</span>
+              <span style="font-size:12px;color:#8A8E99;white-space:nowrap;">Sep 11, 2026, 8:42 AM</span>
+            </div>
+            <h1 style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;text-wrap:balance;">Fix in-stock Toys shown as "Not available" at checkout</h1>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:22px;">
+            <div style="font-size:32px;font-weight:600;letter-spacing:-0.02em;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$38k</div>
+            <div style="font-size:12px;color:#5A5E68;white-space:nowrap;">per month if fixed</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Problem</h2>
+        <div style="display:grid;grid-template-columns:100px minmax(0,1fr);gap:20px 16px;font-size:16px;line-height:1.55;">
+          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">What</span>
+          <span style="color:#1E2024;text-wrap:pretty;">Toys cart abandonment spiked from 45% to 60% in 24 hours. 8,412 carts and $312K in cart value are affected.</span>
+          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">Why</span>
+          <span style="color:#1E2024;text-wrap:pretty;">Backend inventory and the checkout UI disagree, so in-stock Toys SKUs render as "Not available."</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <span onClick="{{ toggleEvidence }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#0052F2;cursor:pointer;white-space:nowrap;">
+            <sc-if value="{{ evidenceClosed }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></sc-if>
+            <sc-if value="{{ evidenceOpen }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></sc-if>
+            How we know · 4 checks
+          </span>
+          <sc-if value="{{ evidenceOpen }}">
+            <div style="display:flex;flex-direction:column;border-top:1px solid #DEDFE2;">
+              <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;color:#1E2024;">
+                <span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEF2E8;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1D804E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
+                <span style="flex:1;min-width:0;line-height:1.5;">Only Toys moved. Every other category held at baseline.</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;color:#1E2024;">
+                <span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEF2E8;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1D804E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
+                <span style="flex:1;min-width:0;line-height:1.5;">Not a price or audience effect: the spike holds across loyalty tiers and cart values.</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;color:#1E2024;">
+                <span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEF2E8;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1D804E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
+                <span style="flex:1;min-width:0;line-height:1.5;">82% of affected carts (6,905) saw "Not available" on a Toys SKU.</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;color:#1E2024;">
+                <span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEF2E8;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1D804E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
+                <span style="flex:1;min-width:0;line-height:1.5;">Every flagged SKU had 300+ units in the Snowflake inventory feed.</span>
+                <a href="#" onClick="{{ toggleSkus }}" style="font-size:14px;font-weight:500;color:#0052F2;text-decoration:none;white-space:nowrap;">6 SKUs →</a>
+              </div>
+            </div>
+            <sc-if value="{{ showSkus }}">
+              <div style="border:1px solid #DEDFE2;border-radius:10px;overflow:hidden;margin-top:4px;">
+                <div style="display:grid;grid-template-columns:1.1fr 2fr 0.8fr 0.8fr 1fr 1.1fr;gap:12px;padding:10px 18px;background:#F4F5F6;border-bottom:1px solid #DEDFE2;font-size:12px;color:#8A8E99;white-space:nowrap;">
+                  <span>SKU</span><span>Product</span><span>Price</span><span>Carts</span><span>Abandon rate</span><span>Error shown</span>
+                </div>
+                <sc-for list="{{ skus }}" as="r" hint-placeholder-count="6">
+                  <div style="{{ r.rowStyle }}">
+                    <span style="font-variant-numeric:tabular-nums;font-size:12px;color:#35373D;">{{ r.sku }}</span>
+                    <span>{{ r.name }}</span>
+                    <span>{{ r.price }}</span>
+                    <span>{{ r.carts }}</span>
+                    <span style="font-weight:500;">{{ r.rate }}</span>
+                    <span style="{{ r.errStyle }}">{{ r.err }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+          </sc-if>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Plan</h2>
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px;font-size:16px;line-height:1.5;color:#1E2024;">
+          <li>Read availability from the live inventory feed (ships first)</li>
+          <li>Alert when an in-stock SKU shows "Not available"</li>
+          <li>Send back-in-stock messages to affected shoppers</li>
+        </ol>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;">
+          <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Activity</h2>
+          <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">2 updates</span>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;padding-bottom:22px;position:relative;">
+            <span style="position:absolute;left:15px;top:32px;bottom:0;width:1px;background:#DEDFE2;"></span>
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span>
+            <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;">Purchase Funnel Agent posted this to #ecom-alerts</span>
+            <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">Sep 11, 8:45 AM</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding-bottom:22px;position:relative;">
+            <span style="position:absolute;left:15px;top:32px;bottom:0;width:1px;background:#DEDFE2;"></span>
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#F4F5F6;color:#5A5E68;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">JZ</span>
+            <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;">Jingshu Zhao marked this ready to execute</span>
+            <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">Sep 11, 10:02 AM</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#F4F5F6;color:#5A5E68;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">JZ</span>
+            <div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid #DEDFE2;border-radius:10px;background:#fff;padding:8px 8px 8px 16px;">
+              <input placeholder="Comment or @mention a teammate…" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+              <span style="width:30px;height:30px;flex:0 0 30px;border-radius:7px;background:#F4F5F6;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+  </main>
+
+  <sc-if value="{{ showSlack }}">
+    <div style="position:fixed;inset:0;z-index:60;background:#1A1D21;display:flex;flex-direction:column;animation:ovIn 200ms ease-out;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;background:#0052F2;color:#fff;padding:9px 16px;font-size:12px;font-weight:500;letter-spacing:0.02em;">A day later</div>
+      <div style="flex:1;display:flex;min-height:0;">
+        <div style="width:230px;flex:0 0 230px;background:#121016;color:#C2C4CA;padding:18px 12px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;gap:9px;padding:0 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-label="Slack"><path d="M5.1 15.1a2.1 2.1 0 1 1-2.1-2.1h2.1zM6.2 15.1a2.1 2.1 0 0 1 4.2 0v5.2a2.1 2.1 0 0 1-4.2 0z" fill="#E01E5A"></path><path d="M8.9 5.1A2.1 2.1 0 1 1 11 3v2.1zM8.9 6.2a2.1 2.1 0 0 1 0 4.2H3.7a2.1 2.1 0 0 1 0-4.2z" fill="#36C5F0"></path><path d="M18.9 8.9A2.1 2.1 0 1 1 21 11h-2.1zM17.8 8.9a2.1 2.1 0 0 1-4.2 0V3.7a2.1 2.1 0 0 1 4.2 0z" fill="#2EB67D"></path><path d="M15.1 18.9A2.1 2.1 0 1 1 13 21v-2.1zM15.1 17.8a2.1 2.1 0 0 1 0-4.2h5.2a2.1 2.1 0 0 1 0 4.2z" fill="#ECB22E"></path></svg>
+            <span style="font-size:16px;font-weight:600;color:#fff;">Acme Store</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;font-size:14px;">
+            <div style="padding:7px 10px;border-radius:6px;">Threads</div>
+            <div style="padding:7px 10px;border-radius:6px;">Drafts &amp; sent</div>
+            <div style="font-size:12px;letter-spacing:0.08em;color:#8A8E99;padding:12px 10px 4px;">CHANNELS</div>
+            <div style="padding:7px 10px;border-radius:6px;"># growth</div>
+            <div style="padding:7px 10px;border-radius:6px;"># ecomm-web</div>
+            <div style="padding:7px 10px;border-radius:6px;background:#0052F2;color:#fff;font-weight:500;"># cart-alerts</div>
+            <div style="padding:7px 10px;border-radius:6px;"># data-platform</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+          <div style="padding:16px 24px;border-bottom:1px solid #2B2F36;color:#fff;font-size:16px;font-weight:600;"># cart-alerts</div>
+          <div style="flex:1;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;gap:18px;">
+            <div style="display:flex;gap:12px;max-width:660px;">
+              <div style="width:38px;height:38px;flex:0 0 38px;border-radius:8px;background:#EEF3FD;display:flex;align-items:center;justify-content:center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.7" stroke-linecap="round"><path d="M2 15c3.5 0 4-12 7.5-12S13 21 16.5 21 20 9 22 9"></path></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <span style="color:#fff;font-size:14px;font-weight:600;">Amplitude Agents</span>
+                  <span style="background:#3A3F47;color:#C2C4CA;border-radius:3px;padding:1px 5px;font-size:12px;letter-spacing:0.04em;">APP</span>
+                  <span style="color:#8A8E99;font-size:12px;">8:42 AM</span>
+                </div>
+                <div style="background:#22252A;border-left:3px solid #D53943;border-radius:8px;padding:16px 18px;">
+                  <div style="color:#fff;font-size:14px;font-weight:600;margin-bottom:6px;">Purchase Funnel Optimization Agent detected a spike</div>
+                  <div style="color:#C2C4CA;font-size:14px;line-height:1.6;margin-bottom:14px;">Cart abandonment in the <strong style="color:#fff;">Children's Toys</strong> category rose from 45% to 60% in the last 24 hours. 8,412 carts affected, roughly $312K at risk. I've completed a root cause investigation.</div>
+                  <button onClick="{{ goReport }}" style="background:#0052F2;border:none;border-radius:6px;padding:9px 16px;font-size:12px;font-weight:500;color:#fff;cursor:pointer;" style-hover="background:#0C3FA7;">See details</button>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid #2B2F36;border-radius:8px;padding:12px 16px;color:#6F7480;font-size:14px;">Message # cart-alerts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showNotice }}">
+    <div onClick="{{ close }}" style="position:fixed;inset:0;background:rgba(16,18,21,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50;animation:ovIn 160ms ease-out;">
+      <div onClick="{{ stop }}" style="background:#fff;border-radius:14px;width:420px;max-width:100%;padding:28px;animation:mdIn 200ms cubic-bezier(0.2,0.7,0.2,1);">
+        <div style="font-size:20px;font-weight:600;margin-bottom:8px;">Onboarding not built</div>
+        <div style="font-size:14px;color:#5A5E68;line-height:1.55;margin-bottom:20px;">This prototype covers the setup flow for the Purchase Funnel Optimization Agent. Open that one to walk through the five steps.</div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button onClick="{{ close }}" style="background:#fff;border:1px solid #C2C4CA;border-radius:8px;padding:9px 16px;font-size:14px;cursor:pointer;">Close</button>
+          <button onClick="{{ openCart }}" style="background:#0052F2;border:none;border-radius:8px;padding:9px 16px;font-size:14px;color:#fff;font-weight:500;cursor:pointer;">Open Cart Abandonment setup</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showWizard }}">
+    <div onClick="{{ close }}" style="position:fixed;inset:0;background:rgba(16,18,21,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50;animation:ovIn 160ms ease-out;">
+      <div onClick="{{ stop }}" style="background:#fff;border-radius:16px;width:760px;max-width:100%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:mdIn 200ms cubic-bezier(0.2,0.7,0.2,1);box-shadow:0 24px 60px rgba(16,18,21,0.28);">
+
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:24px 28px 0;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:40px;height:40px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;flex:0 0 40px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg>
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:600;letter-spacing:-0.01em;">Set up Purchase Funnel Optimization Agent</div>
+              <div style="font-size:12px;color:#8A8E99;margin-top:2px;">{{ stepLabel }}</div>
+            </div>
+          </div>
+          <button onClick="{{ close }}" style="background:none;border:none;color:#8A8E99;font-size:20px;line-height:1;cursor:pointer;padding:4px;">×</button>
+        </div>
+
+        <div style="display:flex;gap:6px;padding:18px 28px 0;">
+          <sc-for list="{{ bars }}" as="b" hint-placeholder-count="5">
+            <div style="{{ b.style }}"></div>
+          </sc-for>
+        </div>
+
+        <div style="padding:22px 28px 26px;overflow-y:auto;">
+
+          <sc-if value="{{ isMapping }}">
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:56px 0 52px;">
+              <div style="width:34px;height:34px;border-radius:50%;border:3px solid #DEDFE2;border-top-color:#0052F2;animation:spin 900ms linear infinite;"></div>
+              <div style="font-size:16px;font-weight:500;">Mapping the data to connected data sources</div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isScanning }}">
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:56px 0 52px;">
+              <div style="width:34px;height:34px;border-radius:50%;border:3px solid #DEDFE2;border-top-color:#0052F2;animation:spin 900ms linear infinite;"></div>
+              <div style="font-size:16px;font-weight:500;">Identifying events in Amplitude</div>
+            </div>
+          </sc-if>
+
+
+          <sc-if value="{{ isStep0 }}">
+            <div>
+              <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Identifying relevant events in Amplitude</div>
+              <div style="font-size:14px;color:#5A5E68;margin-bottom:16px;">The agent scanned your Amplitude data and found 6 events tied to cart behavior.</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;">
+                <sc-for list="{{ events }}" as="e" hint-placeholder-count="6">
+                  <div onClick="{{ e.toggle }}" style="{{ e.rowStyle }}">
+                    <span style="{{ e.boxStyle }}">✓</span>
+                    <span style="font-size:14px;font-family:Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;">{{ e.name }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isStep1 }}">
+            <div>
+              <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Connect more data</div>
+              <div style="font-size:14px;color:#5A5E68;margin-bottom:16px;">We recommend you adde the following event and user properties</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;">
+                <sc-for list="{{ dataFields }}" as="f" hint-placeholder-count="9">
+                  <div onClick="{{ f.toggle }}" style="{{ f.rowStyle }}">
+                    <span style="{{ f.boxStyle }}">✓</span>
+                    <span style="font-size:14px;">{{ f.name }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:16px;">
+                <div style="font-size:14px;font-weight:500;margin-bottom:6px;">Add more data types</div>
+                <input value="{{ customField }}" onChange="{{ onCustomField }}" placeholder="e.g. Shipping estimate, Payment method" style="width:100%;border:1px solid #C2C4CA;border-radius:9px;padding:11px 13px;font-size:14px;font-family:inherit;color:#1E2024;outline:none;" style-focus="border-color:#0052F2;box-shadow:0 0 0 3px rgba(0,82,242,0.32);">
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isStep2 }}">
+            <div>
+              <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Mapped automatically</div>
+              <div style="font-size:14px;color:#5A5E68;margin-bottom:16px;">The agent matched 8 of 10 fields to a source. Two need a manual mapping.</div>
+              <div style="border:1px solid #DEDFE2;border-radius:10px;overflow:hidden;">
+                <sc-for list="{{ mappings }}" as="m" hint-placeholder-count="9">
+                  <div style="{{ m.rowStyle }}">
+                    <span style="font-size:14px;flex:1;min-width:0;">{{ m.name }}</span>
+                    <span style="{{ m.sourceStyle }}">{{ m.source }}</span>
+                    <span style="{{ m.statusStyle }}">{{ m.status }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isStep3 }}">
+            <div>
+              <div style="font-size:16px;font-weight:600;margin-bottom:4px;">Connect other sources</div>
+              <div style="font-size:14px;color:#5A5E68;margin-bottom:16px;">Qualitative signal helps the agent explain why carts are abandoned.</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <sc-for list="{{ sources }}" as="s" hint-placeholder-count="3">
+                  <div style="{{ s.rowStyle }}">
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:14px;font-weight:500;">{{ s.name }}</div>
+                      <div style="font-size:12px;color:#8A8E99;margin-top:2px;">{{ s.desc }}</div>
+                    </div>
+                    <button onClick="{{ s.toggle }}" style="{{ s.btnStyle }}">{{ s.btnLabel }}</button>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isStep4 }}">
+            <div>
+              <div style="font-size:16px;font-weight:600;margin-bottom:4px;">What should the agent do?</div>
+              <div style="font-size:14px;color:#5A5E68;margin-bottom:16px;">Pick one or more. You can change this later.</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <sc-for list="{{ tasks }}" as="t" hint-placeholder-count="4">
+                  <div onClick="{{ t.toggle }}" style="{{ t.rowStyle }}">
+                    <span style="{{ t.boxStyle }}">✓</span>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:14px;font-weight:500;">{{ t.name }}</div>
+                      <div style="font-size:12px;color:#8A8E99;margin-top:2px;">{{ t.desc }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isStep5 }}">
+            <div style="text-align:center;padding:18px 0 10px;">
+              <div style="width:56px;height:56px;border-radius:50%;background:#DEF2E8;color:#1D804E;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px;">✓</div>
+              <div style="font-size:20px;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px;">Purchase Funnel Optimization Agent is set up</div>
+              <div style="font-size:14px;color:#5A5E68;max-width:420px;margin:0 auto 22px;line-height:1.55;">It will run its first pass on the last 30 days of carts and post findings to your Insights feed.</div>
+              <div style="display:inline-flex;flex-direction:column;gap:8px;text-align:left;border:1px solid #DEDFE2;border-radius:10px;padding:16px 18px;min-width:320px;">
+                <div style="display:flex;justify-content:space-between;gap:24px;font-size:14px;"><span style="color:#8A8E99;">Data fields</span><span>{{ summaryFields }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:24px;font-size:14px;"><span style="color:#8A8E99;">Sources</span><span>{{ summarySources }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:24px;font-size:14px;"><span style="color:#8A8E99;">Tasks</span><span>{{ summaryTasks }}</span></div>
+                <div style="display:flex;justify-content:space-between;gap:24px;font-size:14px;"><span style="color:#8A8E99;">Schedule</span><span>Mondays at 9am</span></div>
+              </div>
+            </div>
+          </sc-if>
+
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 28px;border-top:1px solid #DEDFE2;background:#F4F5F6;">
+          <button onClick="{{ back }}" style="{{ backStyle }}">Back</button>
+          <button onClick="{{ next }}" style="background:#0052F2;border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:500;color:#fff;cursor:pointer;" style-hover="background:#0C3FA7;">{{ nextLabel }}</button>
+        </div>
+
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = {
+    modal: null,
+    agent: (typeof location !== "undefined" && location.hash === "#pd") ? "pd" : "pfo",
+    view: (typeof location !== "undefined" && (location.hash === "#agent" || location.hash === "#pd")) ? "chat" : "new",
+    step: 1,
+    fields: {},
+    customField: "",
+    events: {},
+    sources: { Zendesk: false, Community: false, "Social channels": false },
+    tasks: { "Identify friction": true, "Recommend product improvements": true, "Design experiments": false, "Schedule regular Cart performance report": false }
+  };
+
+  EVENTS = ["Add_to_Cart","Close_Cart","Continue_to_Checkout","View_Cart","Remove_from_Cart","Change_Quantity_in_Cart"];
+  FIELDS = ["Number of SKUs added","SKU ID","SKU Price","SKU Category","Cart value","Customer Loyalty Tier","Customer LTV","Customer Last Purchase Date","SKU Availability","Discount type"];
+  MAP = [
+    ["Number of SKUs added","Amplitude","ok"],["SKU ID","Amplitude","ok"],["SKU Price","Snowflake","ok"],["SKU Category","Snowflake","ok"],
+    ["Cart value","Amplitude","ok"],["Customer Loyalty Tier","Snowflake","ok"],["Customer LTV","Snowflake","ok"],
+    ["Customer Last Purchase Date","Amplitude","ok"],["SKU Availability","—","need"],["Discount type","—","need"]
+  ];
+  SRC = [["Zendesk","Support tickets and CSAT verbatims"],["Community","Forum threads and feature requests"],["Social channels","X, Reddit and Instagram mentions"]];
+  TASKS = [["Identify friction","Surface where and why carts are abandoned"],["Recommend product improvements","Identify best practices and benchmarks from other similar companies and make product recommendations"],["Design experiments","Design experiments to improve Cart conversion"],["Schedule regular Cart performance report","Post a recurring cart health summary to your team"]];
+
+  set = (k, v) => this.setState({ [k]: v });
+
+  SKUS = [
+    ["TOY-4412","Plush Cow Family Set","$24.99","1,284","64%","Not available"],
+    ["TOY-8871","Build-a-Farm Blocks (120 pc)","$39.99","1,106","62%","Not available"],
+    ["TOY-2093","Kids' Cow Costume, size 4T","$29.50","948","61%","Not available"],
+    ["TOY-6650","Story Time Board Book Bundle","$18.00","742","58%","—"],
+    ["TOY-1178","Mini Delivery Truck Playset","$21.75","690","57%","Not available"],
+    ["TOY-3320","Coloring & Sticker Activity Kit","$12.25","533","49%","—"]
+  ];
+
+  TRIAGE = [
+    ["Segmented the spike","Isolated sessions containing an Add_to_Cart event with SKU Category = Toys. The lift is confined to that category; all other categories held at baseline."],
+    ["Checked user profiles and cart values","Spike holds across loyalty tiers, LTV bands and cart values, so it isn't a price or audience effect. Median affected cart value was $46.80."],
+    ["Found a shared error state","Of the 8,412 affected carts, 6,905 (82%) saw a \"Not available\" error on at least one Toys SKU at cart or checkout."],
+    ["Cross-checked inventory data","Queried the inventory feed in Snowflake for those SKUs at the timestamps of the errors. Every one of them was in stock, with 300+ units on hand."]
+  ];
+
+  OPPS = [
+    null,
+    { badge: "Friction detected", tone: "red", when: "Sep 9, 2026, 7:15 AM", posted: "Sep 9, 7:18 AM", title: "Guest shoppers abandon twice as often at the account-creation prompt", impact: "+$22k", impactLabel: "per month if fixed",
+      what: "Guest shoppers abandon at 38% on the account-creation step, compared with 19% for signed-in shoppers. 11,240 guest checkouts reached this step in the last 7 days.",
+      why: "Checkout asks guests to create an account before payment. \"Continue as guest\" is a secondary text link, and 72% of guests who abandoned never clicked it.",
+      checks: ["Drop-off is isolated to the Create_Account step. The steps before and after match signed-in shoppers.", "The gap holds on desktop and mobile, so it isn't a layout issue on one device.", "Only 28% of guests who abandoned clicked \"Continue as guest\".", "146 Zendesk tickets in the last 30 days mention being forced to create an account."],
+      plan: ["Make \"Continue as guest\" the primary button", "Offer account creation on the order confirmation page", "Prefill the new account from the order email and address"] },
+    { badge: "Regression", tone: "red", when: "Sep 11, 2026, 6:50 AM", posted: "Sep 11, 6:52 AM", title: "Shipping-step drop-off rose 8% on mobile Safari after the Sep 9 release", impact: "+$15k", impactLabel: "per month if fixed",
+      what: "Drop-off at the shipping step on mobile Safari rose from 21% to 29% after release v4.18 on Sep 9. Chrome and Android held steady.",
+      why: "The new address autocomplete doesn't fire on iOS Safari, so the ZIP field stays empty and the Continue button stays disabled.",
+      checks: ["The shift starts within an hour of the v4.18 deploy.", "Only iOS Safari 17 and 18 moved. Chrome on iOS and all Android browsers held at baseline.", "64% of drop-offs never fired Address_Autocomplete_Selected.", "Session replays show repeated taps on a disabled Continue button."],
+      plan: ["Roll back the autocomplete component on iOS Safari", "Add a manual-entry fallback when autocomplete doesn't respond", "Alert on shipping-step drop-off by browser"] },
+    { badge: "Friction detected", tone: "red", when: "Sep 10, 2026, 9:05 AM", posted: "Sep 10, 9:07 AM", title: "Valid promo codes return \"Invalid code\" for 3.2% of checkouts", impact: "+$9k", impactLabel: "per month if fixed",
+      what: "3.2% of checkouts that apply a promo code see \"Invalid code\" for a code that is active. 2,180 checkouts were affected in the last 14 days, and 41% of them were abandoned.",
+      why: "Code validation is case-sensitive. Codes in the September emails are uppercase, and mobile keyboards capitalize only the first letter.",
+      checks: ["Failures cluster on 4 codes, all from the September email campaign.", "97% of failed entries match an active code when compared without case.", "Mobile accounts for 84% of failures.", "Abandonment after a failed code is 41%, compared with 12% after a successful one."],
+      plan: ["Validate promo codes without case sensitivity", "Auto-apply codes from email links", "Show the matched offer as the shopper types"] },
+    { badge: "Personalization", tone: "lilac", when: "Sep 10, 2026, 11:30 AM", posted: "Sep 10, 11:32 AM", title: "Personalize among free shipping, 10% off, loyalty points and no offer for each shopper", impact: "+$41k", impactLabel: "per month in net revenue", problemTitle: "Opportunity",
+      what: "Every abandoned cart gets the same 10% off email. 18% of discount redemptions come from shoppers who would likely have bought without it.",
+      why: "Response differs by segment. First-time shoppers respond to free shipping, loyalty members to points, and repeat shoppers with large carts convert without an offer.",
+      checks: ["Modeled on 9 months of cart-recovery emails (412K sends).", "Free shipping lifts first-time shopper conversion 2.1x more than 10% off.", "Loyalty members redeem points offers at 31%, compared with 19% for discounts.", "Repeat shoppers with carts over $80 converted at the same rate with or without an offer."],
+      tableTitle: "Proposed treatments", cols: { a: "Segment", b: "Share", c: "Offer", d: "Net lift" },
+      rows: [["First-time shoppers", "42%", "Free shipping", "+6.8%"], ["Loyalty Gold and Platinum", "14%", "2x loyalty points", "+4.1%"], ["Repeat shoppers, cart over $80", "19%", "No offer", "+3.2%"], ["Used a code in the last 90 days", "25%", "10% off", "+2.4%"]],
+      plan: ["Launch with a 5% holdout on the current 10% off email", "Ramp to 100% after 7 days if net revenue holds", "Post weekly lift by segment to #ecom-alerts"] },
+    { badge: "Personalization", tone: "lilac", when: "Sep 9, 2026, 3:20 PM", posted: "Sep 9, 3:22 PM", title: "Personalize cart-page recommendations by category affinity", impact: "+$12k", impactLabel: "per month in added order value", problemTitle: "Opportunity",
+      what: "The cart page shows the same 8 best sellers to every shopper. Click-through is 1.9%, and 0.4% of carts add a recommended item.",
+      why: "61% of carts hold a single category, and same-category recommendations convert 3x better than best sellers.",
+      checks: ["In the August pilot on Baby, category-matched recommendations converted at 1.2%, compared with 0.4%.", "Average order value rises $7.40 when a recommended item is added.", "Best sellers overlap with the cart's own items in 22% of sessions."],
+      tableTitle: "Proposed recommendations", cols: { a: "Cart contains", b: "Carts", c: "Recommend", d: "Est. CTR" },
+      rows: [["Toys", "24%", "Age-matched toys and books", "4.6%"], ["Baby", "21%", "Diaper and wipe bundles", "5.2%"], ["Home", "16%", "Items from the same collection", "3.1%"], ["Mixed or new shopper", "39%", "Best sellers (current)", "1.9%"]],
+      plan: ["Switch the cart widget to category affinity", "Fall back to best sellers when affinity is unclear", "Run as a 50/50 test for 14 days"] },
+    { badge: "Test proposal", tone: "blue", when: "Sep 11, 2026, 10:10 AM", posted: "Sep 11, 10:12 AM", title: "Test free shipping vs. 10% off to find the strongest lift in net revenue", impact: "+$24k", impactLabel: "per month if B wins", problemTitle: "Opportunity",
+      what: "The checkout banner offers 10% off orders over $50. Discount cost reached $186K last month, 9% of revenue from qualifying orders.",
+      why: "Free shipping costs less per order ($6.20 vs. $9.40 on average), and past promos suggest a similar conversion lift.",
+      checks: ["During the 2025 holiday promo, free shipping matched 10% off on conversion within 0.4 pts.", "Shipping cost is the second most common reason in exit surveys (23%).", "Average shipping cost on orders over $50 is $6.20."],
+      kv: [["Variants", "A: 10% off orders over $50 (control) · B: Free shipping on orders over $50"], ["Audience", "All US shoppers who reach the cart"], ["Primary metric", "Net revenue per visitor"], ["Guardrails", "Checkout conversion, average order value"], ["Sample and duration", "52K visitors per arm, about 12 days"]],
+      plan: ["Set up the experiment in Amplitude Experiment", "Run at 50/50 for 12 days", "Roll out the winner on net revenue per visitor"] },
+    { badge: "Test proposal", tone: "blue", when: "Sep 10, 2026, 2:45 PM", posted: "Sep 10, 2:47 PM", title: "Test one-page vs. multi-step checkout for returning shoppers", impact: "+$18k", impactLabel: "per month if B wins", problemTitle: "Opportunity",
+      what: "Returning shoppers go through 4 checkout steps even though 78% have a saved address and card. Their checkout completion is 71%.",
+      why: "Each step loses 5–9% of returning shoppers, mostly on steps where they only confirm saved details.",
+      checks: ["Only 4% of returning shoppers edit a saved address or card.", "Median time on the shipping and payment steps is 9 seconds with no edits.", "Completion drops 6 pts between the shipping and review steps."],
+      kv: [["Variants", "A: 4-step checkout (control) · B: One-page checkout with saved details"], ["Audience", "Signed-in shoppers with a saved address and card"], ["Primary metric", "Checkout completion rate"], ["Guardrails", "Order errors, returns within 14 days"], ["Sample and duration", "18K shoppers per arm, about 16 days"]],
+      plan: ["Build the one-page variant behind a feature flag", "Run at 50/50 for 16 days", "Ship to all returning shoppers if completion improves"] },
+    { badge: "Test proposal", tone: "blue", when: "Sep 9, 2026, 1:00 PM", posted: "Sep 9, 1:02 PM", title: "Test showing Apple Pay first on mobile checkout", impact: "+$7k", impactLabel: "per month if B wins", problemTitle: "Opportunity",
+      what: "On mobile, Apple Pay is the third payment option, below the card form. 22% of iOS shoppers use it today.",
+      why: "Apple Pay shoppers complete payment 2.4x faster and abandon the payment step at 6%, compared with 17% for card entry.",
+      checks: ["Payment-step abandonment on iOS is 17% for card entry and 6% for Apple Pay.", "71% of iOS shoppers have Apple Pay available on their device.", "Card-entry errors account for 38% of payment-step exits."],
+      kv: [["Variants", "A: Card form first (control) · B: Apple Pay button first"], ["Audience", "iOS Safari shoppers with Apple Pay available"], ["Primary metric", "Payment step completion"], ["Guardrails", "Payment failures, average order value"], ["Sample and duration", "31K shoppers per arm, about 10 days"]],
+      plan: ["Reorder payment options for the test group", "Run at 50/50 for 10 days", "Roll out to all iOS shoppers if completion improves"] },
+    { agent: "pd", group: "Fix", pri: "High", status: "ready", who: "JZ", d: "Sep 11", badge: "Search gap", tone: "red", when: "Sep 11, 2026, 7:40 AM", posted: "Sep 11, 7:42 AM", title: "Searches for \"legos\" return no results because plurals aren't matched", impact: "+$19k", impactLabel: "per month if fixed",
+      what: "4,820 searches in the last 7 days returned no results for plural forms of in-stock products, including \"legos\", \"barbies\" and \"hot wheel\". 71% of those shoppers left without viewing a product.",
+      why: "The search index matches exact terms only. Plural matching and synonyms were turned off in the Sep 2 index rebuild.",
+      checks: ["Zero-result rate rose from 3.1% to 7.4% starting Sep 2.", "92% of the new zero-result queries are plurals or near-spellings of products that are in stock.", "The singular form of each query returns 40+ products.", "Shoppers who hit zero results leave search at 71%, compared with 24% for other searches."],
+      plan: ["Turn plural matching and the synonym list back on", "Alert when zero-result rate rises 2 pts day over day", "Show \"Did you mean\" suggestions on zero-result pages"] },
+    { agent: "pd", group: "Fix", pri: "Medium", status: "triage", d: "Sep 10", badge: "Broken experience", tone: "red", when: "Sep 10, 2026, 8:20 AM", posted: "Sep 10, 8:22 AM", title: "Homepage hero banner links to a sold-out Back to School collection", impact: "+$11k", impactLabel: "per month if fixed",
+      what: "The homepage hero has sent 212K shoppers to the Back to School collection since Sep 1. 64% of its products are now out of stock.",
+      why: "The banner is scheduled through Sep 30, but the collection sold through on Sep 6. Click-through held at 6.2% while add-to-cart on the page fell from 9.8% to 2.1%.",
+      checks: ["Add-to-cart on the collection page fell 7.7 pts after Sep 6.", "38 of 59 products in the collection show \"Out of stock\".", "Other homepage modules held steady over the same period.", "Bounce rate on the collection page rose from 31% to 58%."],
+      plan: ["Swap the hero to the Fall Home collection (in stock, 4.1% add-to-cart)", "Hide out-of-stock products on banner landing pages", "Alert when a banner's destination drops below 50% in stock"] },
+    { agent: "pd", group: "Fix", pri: "Medium", status: "triage", d: "Sep 9", badge: "Friction detected", tone: "red", when: "Sep 9, 2026, 9:10 AM", posted: "Sep 9, 9:12 AM", title: "Halloween landing page loads in 6.8s on mobile, 3x the site average", impact: "+$14k", impactLabel: "per month if fixed",
+      what: "The Halloween landing page had 96K mobile visits this week. Median load time is 6.8 seconds, and 44% of visitors leave before it finishes loading.",
+      why: "The page loads 41 full-size product images above the fold, 18 MB in total, with no lazy loading.",
+      checks: ["Bounce rate is 44% on mobile and 19% on desktop.", "Load time crossed 5 seconds when 30 products were added on Sep 8.", "Shoppers who wait for the page add to cart at 8.3%, above the site average."],
+      plan: ["Lazy-load images below the first two rows", "Serve compressed, mobile-sized images", "Alert on landing pages with a median load time over 3 seconds"] },
+    { agent: "pd", group: "A/B Testing", pri: "High", status: "triage", d: "Sep 11", badge: "Test proposal", tone: "blue", when: "Sep 11, 2026, 11:05 AM", posted: "Sep 11, 11:07 AM", title: "Test \"Gifts under $25\" vs. \"Trending toys\" as the holiday homepage banner", impact: "+$21k", impactLabel: "per month if B wins", problemTitle: "Opportunity",
+      what: "The holiday homepage banner goes live Nov 1 and will reach about 3.4M shoppers. The team has two concepts and no data on which performs better.",
+      why: "Last year, gift-guide banners drove 2.3x more add-to-cart than trend banners, but this year's traffic skews toward new shoppers, who browse differently.",
+      checks: ["Price-anchored modules had 7.1% click-through in Q4 2025, compared with 4.8% for trend modules.", "New shoppers are 46% of homepage traffic this quarter, up from 31%.", "Both destination pages have more than 90% of products in stock."],
+      kv: [["Variants", "A: Gifts under $25 · B: Trending toys"], ["Audience", "All US homepage visitors"], ["Primary metric", "Add to cart per banner click"], ["Guardrails", "Homepage bounce rate, revenue per visitor"], ["Sample and duration", "41K visitors per arm, about 5 days"]],
+      plan: ["Run the test Oct 20–25, before the holiday launch", "Ship the winner as the Nov 1 banner", "Break down results for new and returning shoppers"] },
+    { agent: "pd", group: "A/B Testing", pri: "Medium", status: "triage", d: "Sep 10", badge: "Test proposal", tone: "blue", when: "Sep 10, 2026, 1:30 PM", posted: "Sep 10, 1:32 PM", title: "Test search autocomplete with product images vs. text-only suggestions", impact: "+$16k", impactLabel: "per month if B wins", problemTitle: "Opportunity",
+      what: "Search autocomplete shows text-only suggestions. 38% of searches use a suggestion, and 22% of those still end without a product view.",
+      why: "Shoppers can't tell similar products apart from text alone, especially in Toys and Electronics, where product names are long.",
+      checks: ["Suggestion use is 38% on desktop and 29% on mobile.", "Shoppers refine 1 in 4 searches that start from a suggestion.", "All of the top 50 suggestions have product images available."],
+      kv: [["Variants", "A: Text-only suggestions (control) · B: Suggestions with product image and price"], ["Audience", "All shoppers who type in the search bar"], ["Primary metric", "Search-to-product-view rate"], ["Guardrails", "Search latency, add to cart from search"], ["Sample and duration", "64K searches per arm, about 9 days"]],
+      plan: ["Set up the experiment in Amplitude Experiment", "Run at 50/50 for 9 days", "Roll out the winner on search-to-product-view rate"] },
+    { agent: "pd", group: "A/B Testing", pri: "Low", status: "triage", d: "Sep 9", badge: "Test proposal", tone: "blue", when: "Sep 9, 2026, 2:15 PM", posted: "Sep 9, 2:17 PM", title: "Test a category grid vs. a hero carousel on the Toys landing page", impact: "+$9k", impactLabel: "per month if B wins", problemTitle: "Opportunity",
+      what: "The Toys landing page opens with a 5-slide carousel. 81% of clicks go to the first slide, and slides 3–5 get under 2% each.",
+      why: "Most shoppers arrive looking for a specific age or category, and on mobile the carousel pushes category links below the fold.",
+      checks: ["The first slide gets 81% of carousel clicks.", "On mobile, category links start 1,140 px down the page.", "Shoppers who use a category link convert at 6.4%, compared with 3.9% from the carousel."],
+      kv: [["Variants", "A: Hero carousel (control) · B: Category grid by age and type"], ["Audience", "Toys landing page visitors"], ["Primary metric", "Product views per visit"], ["Guardrails", "Add-to-cart rate, bounce rate"], ["Sample and duration", "22K visitors per arm, about 14 days"]],
+      plan: ["Build the category grid variant", "Run at 50/50 for 14 days", "Apply the winning layout to other category pages"] },
+    { agent: "pd", group: "Personalization", pri: "High", status: "triage", d: "Sep 11", badge: "Personalization", tone: "lilac", when: "Sep 11, 2026, 9:50 AM", posted: "Sep 11, 9:52 AM", title: "Rank search results by each shopper's preferred brands and sizes", impact: "+$27k", impactLabel: "per month in added revenue", problemTitle: "Opportunity",
+      what: "Search results are ranked the same for every shopper. On queries like \"diapers\" and \"kids shoes\", shoppers scroll past 14 products on average before their first click.",
+      why: "60% of repeat shoppers buy the same brand or size every time, and their purchase history isn't used in ranking.",
+      checks: ["Modeled on 6 months of search and purchase history (2.1M shoppers).", "Repeat shoppers rebuy the same brand 60% of the time in Baby and Apparel.", "Results in positions 1–4 convert 3.2x better than positions 13–16."],
+      tableTitle: "Proposed ranking", cols: { a: "Shopper group", b: "Share", c: "Ranking boost", d: "Est. lift" },
+      rows: [["Repeat Baby shoppers", "18%", "Preferred diaper brand and size", "+9.4%"], ["Repeat Apparel shoppers", "22%", "Saved sizes and brands", "+6.1%"], ["Repeat shoppers, other categories", "27%", "Past brands", "+3.0%"], ["New shoppers", "33%", "Default ranking (current)", "—"]],
+      plan: ["Launch with a 10% holdout on current ranking", "Start with Baby and Apparel queries", "Report search conversion weekly by shopper group"] },
+    { agent: "pd", group: "Personalization", pri: "Medium", status: "triage", d: "Sep 10", badge: "Personalization", tone: "lilac", when: "Sep 10, 2026, 3:40 PM", posted: "Sep 10, 3:42 PM", title: "Show a different homepage banner to new, returning and lapsed shoppers", impact: "+$13k", impactLabel: "per month in added revenue", problemTitle: "Opportunity",
+      what: "Every visitor sees the same homepage banner. Click-through is 3.4% for new shoppers, 5.9% for returning shoppers and 1.8% for lapsed shoppers.",
+      why: "The banner is planned around returning shoppers. Lapsed shoppers respond to win-back offers, and new shoppers to best sellers.",
+      checks: ["Lapsed shoppers (no purchase in 180 days) are 21% of homepage traffic.", "Win-back emails convert lapsed shoppers at 2.6x the rate of the homepage banner.", "New shoppers click best-seller modules 1.8x more than seasonal ones."],
+      tableTitle: "Proposed banners", cols: { a: "Segment", b: "Share", c: "Banner", d: "Est. CTR" },
+      rows: [["New shoppers", "34%", "Best sellers under $30", "5.1%"], ["Returning shoppers", "45%", "Seasonal collection (current)", "5.9%"], ["Lapsed 180+ days", "21%", "Welcome back: 15% off", "4.2%"]],
+      plan: ["Launch with a 5% holdout on the current banner", "Ramp to 100% after 7 days if click-through holds", "Post weekly results by segment to #ecom-alerts"] }
+  ];
+
+  AGENTS = {
+    pfo: { name: "Purchase Funnel Optimizer", title: "Purchase Funnel Optimizer", crumb: "Purchase Funnel Optimizer", label: "Purchase Funnel Agent",
+      goal: "Reduce cart abandonment and grow recovered revenue.", about: "I monitor cart and checkout, find the root cause of drop-offs, and recommend fixes, experiments and personalization.",
+      placeholder: "Ask about opportunities to optimize your purchase funnel", counts: [9, 8, 1],
+      kpis: [["Conversion rate", "↓ 0.4 pts vs last week", 0, "3.2%"], ["Abandonment rate", "↑ 4.1 pts vs last week", 0, "52.4%"], ["Total revenue (7d)", "↓ 3% vs last week", 0, "$2.41M"]],
+      art: ["Toys abandonment spike report", "Report · Sep 11", "Cart health dashboard", "Dashboard · Updated hourly", "Add to cart → purchase funnel", "Chart · Toys, 30 days", "High-intent abandoners", "Cohort · 1,284 users"],
+      side: ["Why did Toys abandonment spike?", "Free shipping vs. 10% off test setup", "Mobile Safari checkout drop-off"] },
+    pd: { name: "Product Discovery Agent", title: "Product Discovery Agent", crumb: "Product Discovery Agent", label: "Product Discovery Agent",
+      goal: "Help shoppers find the right products through search, banners and landing pages.", about: "I monitor search terms, homepage banners and landing pages, find where shoppers fail to reach a product, and recommend fixes, experiments and personalization.",
+      placeholder: "Ask about search terms, banners, landing pages…", counts: [8, 7, 1],
+      kpis: [["Conversion rate", "↓ 0.4 pts vs last week", 0, "3.2%"], ["Abandonment rate", "↑ 4.1 pts vs last week", 0, "52.4%"], ["Total revenue (7d)", "↓ 3% vs last week", 0, "$2.41M"]],
+      art: ["Zero-result search report", "Report · Sep 11", "Search and discovery dashboard", "Dashboard · Updated hourly", "Search → product view funnel", "Chart · All queries, 30 days", "Zero-result searchers", "Cohort · 4,820 users"],
+      side: ["Why did zero-result searches rise?", "Holiday banner test setup", "Halloween page load time"] }
+  };
+
+  openOpp = i => { this.setState({ view: "report", opp: i, agent: i >= 9 ? "pd" : "pfo", evidenceOpen: false, showSkus: false, actionOpen: false }); try { window.scrollTo(0, 0); document.querySelectorAll("main").forEach(m => m.scrollTo && m.scrollTo(0, 0)); } catch (e) {} };
+
+  agentVals(s) {
+    const pd = s.agent === "pd", Ag = this.AGENTS[pd ? "pd" : "pfo"], notNew = !!s.view && s.view !== "new", rep = s.view === "report";
+    const nav = on => "display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:9px;cursor:pointer;font-size:14px;white-space:nowrap;min-width:0;overflow:hidden;" + (on ? "background:#DEDFE2;color:#1E2024;font-weight:500;" : "color:#35373D;");
+    const tones = { red: "#FAE2E2;color:#B41823", lilac: "#DEDFF7;color:#474BC3", blue: "#EEF3FD;color:#0052F2" };
+    const ink = { red: "#B41823", lilac: "#474BC3", blue: "#0052F2" };
+    const bars = { High: ["#E0712B", "#E0712B", "#E0712B"], Medium: ["#0052F2", "#0052F2", "#C2C4CA"], Low: ["#8A8E99", "#C2C4CA", "#C2C4CA"] };
+    const badgeStyle = t => "background:" + tones[t] + ";border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;";
+    const num = x => parseFloat(String(x.impact).replace(/[^0-9.]/g, ""));
+    const rows = this.OPPS.map((x, i) => x && x.agent === "pd" ? { ...x, i } : null).filter(Boolean).sort((a, b) => num(b) - num(a)).map(x => {
+      const ready = x.status === "ready", b = bars[x.pri];
+      return { group: x.group, d: x.d, title: x.title, impact: x.impact + "/mo", pri: x.pri, b1: b[0], b2: b[1], b3: b[2], who: x.who || "", hasWho: !!x.who, noWho: !x.who,
+        statusLabel: ready ? "Ready to Execute" : "Triage",
+        pillStyle: "display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;background:" + (ready ? "#EEF3FD" : "#FCE8F2") + ";",
+        dotStyle: "width:6px;height:6px;border-radius:50%;background:" + (ready ? "#0052F2" : "#D63C90") + ";",
+        type: x.group === "Fix" ? x.badge : x.group,
+        typeStyle: "flex:0 1 112px;min-width:0;overflow:hidden;text-overflow:ellipsis;text-align:left;font-size:12px;font-weight:500;white-space:nowrap;color:" + ink[x.tone] + ";",
+        badge: x.badge, badgeStyle: badgeStyle(x.tone), when: x.when, go: () => this.openOpp(x.i) };
+    });
+    const dayNames = { "Sep 11": "Fri, Sep 11", "Sep 10": "Thu, Sep 10", "Sep 9": "Wed, Sep 9" };
+    const days = ["Sep 11", "Sep 10", "Sep 9"].map(d => ({ label: dayNames[d], rows: rows.filter(r => r.d === d) }));
+    const o = this.OPPS[s.opp];
+    const out = {
+      skills: [...((s.hideSkill || {})[pd ? "pd" : "pfo"] ? [] : [{ name: pd ? "product-discovery-agent.md" : "purchase-funnel-optimizer.md", remove: () => this.setState(p => ({ hideSkill: { ...(p.hideSkill || {}), [pd ? "pd" : "pfo"]: true } })) }]), ...(s.skills || []).map((name, i) => ({ name, remove: () => this.setState(p => ({ skills: (p.skills || []).filter((_, j) => j !== i) })) }))],
+      onSkills: e => { const names = Array.from((e.target && e.target.files) || []).map(f => f.name); if (names.length) this.setState(p => ({ skills: [...(p.skills || []), ...names] })); try { e.target.value = ""; } catch (x) {} },
+      actDays: (pd ? ["Zero-result searches and holiday banner test", "Sold-out banner and autocomplete test", "Slow Halloween page and Toys carousel test", "Search conversion steady at 63%", "Weekly discovery summary"] : ["Toys checkout spike and free shipping test", "Promo code errors and offer personalization", "Guest checkout drop-off and Apple Pay test", "Abandonment steady at 48%", "Weekly cart health summary"]).map((desc, i) => ({ desc, day: ["Today", "Yesterday", "Wed, Sep 9", "Tue, Sep 8", "Mon, Sep 7"][i], rowStyle: "display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:10px;font-size:14px;color:#1E2024;cursor:pointer;" + (i ? "" : "background:#F4F5F6;font-weight:500;") })),
+      kpiSummary: pd ? "Conversion slipped to 3.2% this week and total revenue is down 3%. Rising zero-result searches are a likely driver." : "Cart abandonment rose 4.1 pts this week and conversion slipped to 3.2%, so total revenue is down 3%.",
+      isPFO: !pd, isPD: pd, agentName: Ag.name, agentTitle: Ag.title, agentCrumb: Ag.crumb, agentGoal: Ag.goal, agentAbout: Ag.about, agentPlaceholder: Ag.placeholder,
+      agentHash: pd ? "#pd" : "#agent", cntAll: Ag.counts[0], cntTriage: Ag.counts[1], cntReady: Ag.counts[2],
+      kpis: Ag.kpis.map(([l, dl, good, v]) => ({ l, dl, v, dStyle: "font-size:12px;font-weight:500;color:" + (good ? "#1D804E" : "#D53943") + ";" })),
+      art: { a: Ag.art[0], as: Ag.art[1], b: Ag.art[2], bs: Ag.art[3], c: Ag.art[4], cs: Ag.art[5], d: Ag.art[6], ds: Ag.art[7] },
+      side: { a: Ag.side[0], b: Ag.side[1], c: Ag.side[2] },
+      cartNavStyle: nav(notNew && !pd), pdNavStyle: nav(notNew && pd),
+      goCart: () => this.setState({ view: "chat", agent: "pfo", modal: null }),
+      goPD: () => this.setState({ view: "chat", agent: "pd", modal: null }),
+      goReport: () => this.openOpp(0),
+      pdGroups: ["Fix", "A/B Testing", "Personalization"].map((g, gi) => { const r = rows.filter(x => x.group === g); return { name: g, count: r.length, rows: r, hdrStyle: "display:flex;align-items:center;gap:10px;padding:10px 16px;background:#F4F5F6;" + (gi ? "border-top:1px solid #DEDFE2;" : "") }; }),
+      pdDays: s.feedMoreOpen ? days : days.slice(0, 2),
+      pdCards: rows.filter(r => r.d === "Sep 11"),
+      isReport: rep, isReport0: rep && !s.opp, isReportX: rep && !!s.opp,
+      isLaunch: rep && !!o && (o.tone === "blue" || o.tone === "lilac"),
+      launchLabel: o && o.tone === "blue" ? "Launch A/B test" : "Roll out personalization",
+      opp: o ? { ...o, agentLabel: this.AGENTS[o.agent === "pd" ? "pd" : "pfo"].label, problemTitle: o.problemTitle || "Problem", badgeStyle: badgeStyle(o.tone),
+        checksLabel: "How we know · " + o.checks.length + " checks", checks: o.checks.map(text => ({ text })), plan: o.plan.map(text => ({ text })),
+        hasKV: !!o.kv, kv: (o.kv || []).map(([k, v]) => ({ k, v })), hasTable: !!o.rows, cols: o.cols || {},
+        rows: (o.rows || []).map(([a, b, c, d], i) => ({ a, b, c, d, rowStyle: "display:grid;grid-template-columns:2fr 0.8fr 2fr 1fr;gap:12px;padding:13px 18px;font-size:14px;align-items:center;" + (i ? "border-top:1px solid #DEDFE2;" : "") })) } : { checks: [], plan: [], kv: [], rows: [], cols: {} }
+    };
+    for (let i = 0; i < this.OPPS.length; i++) out["goOpp" + i] = () => this.openOpp(i);
+    return out;
+  }
+
+  renderVals() {
+    const s = this.state, step = s.step, mapping = !!s.mapping, scanning = !!s.scanning, busy = mapping || scanning;
+    const chk = on => "width:18px;height:18px;flex:0 0 18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;border:1px solid " +
+      (on ? "#0052F2;background:#0052F2;color:#fff;" : "#C2C4CA;background:#fff;color:transparent;");
+
+    const labels = ["Identify events","Connect more data","Map sources","Connect other sources","Choose tasks","Finish"];
+    return {
+      isNew: !s.view || s.view === "new",
+      notNew: !!s.view && s.view !== "new",
+      isChat: s.view === "chat" || s.view === "agents",
+      fbOpen: !!s.fbOpen, fbSent: !!s.fbSent, fbNotSent: !s.fbSent, fbText: s.fbText || "",
+      toggleFb: () => this.setState(p => ({ fbOpen: !p.fbOpen, fbSent: false })),
+      onFb: e => this.setState({ fbText: e.target.value }),
+      sendFb: () => { try { const k = "va-feedback"; const l = JSON.parse(localStorage.getItem(k) || "[]"); l.push({ option: "A", text: s.fbText || "", at: new Date().toISOString() }); localStorage.setItem(k, JSON.stringify(l)); } catch (e) {} this.setState({ fbSent: true, fbText: "" }); setTimeout(() => this.setState({ fbOpen: false, fbSent: false }), 1600); },
+      notChat: !(s.view === "chat" || s.view === "agents"),
+      panelOpen: !!s.panelOpen,
+      chatsOpen: !!s.chatsOpen,
+      chatsClosed: !s.chatsOpen,
+      toggleChats: () => this.setState(p => ({ chatsOpen: !p.chatsOpen })),
+      closeChats: () => this.setState({ chatsOpen: false }),
+      actionOpen: !!s.actionOpen,
+      toggleAction: () => this.setState(p => ({ actionOpen: !p.actionOpen })),
+      closeAction: () => this.setState({ actionOpen: false }),
+      showSkus: !!s.showSkus,
+      evidenceOpen: !!s.evidenceOpen,
+      evidenceClosed: !s.evidenceOpen,
+      toggleEvidence: () => this.setState(p => ({ evidenceOpen: !p.evidenceOpen })),
+      toggleSkus: e => { e && e.preventDefault(); this.setState(p => ({ showSkus: !p.showSkus })); },
+      togglePanel: () => this.setState(p => ({ panelOpen: !p.panelOpen })),
+      chatGridStyle: "display:grid;grid-template-columns:" + (s.panelOpen ? "minmax(0,1fr) min(440px,45%)" : "minmax(0,1fr)") + ";gap:0;margin:-26px -34px -60px;min-height:100vh;",
+      pillStyle: "display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:6px 16px 6px 6px;font-size:14px;font-weight:500;background:#fff;white-space:nowrap;cursor:pointer;border:1px solid #DEDFE2;",
+      tabGoalOn: (s.ptab || "goal") === "goal", tabGoalOff: (s.ptab || "goal") !== "goal", setTabGoal: () => this.setState({ ptab: "goal" }),
+      tabArtOn: s.ptab === "art", tabArtOff: s.ptab !== "art", setTabArt: () => this.setState({ ptab: "art" }),
+      tabAboutOn: s.ptab === "about", tabAboutOff: s.ptab !== "about", setTabAbout: () => this.setState({ ptab: "about" }),
+      goNew: () => this.setState({ view: "new", modal: null }),
+      goCart: () => this.setState({ view: "chat", modal: null }),
+      newNavStyle: "display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:9px;cursor:pointer;font-size:14px;white-space:nowrap;" + ((!s.view || s.view === "new") ? "background:#DEDFE2;color:#1E2024;font-weight:500;" : "color:#35373D;"),
+      cartNavStyle: "display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:9px;cursor:pointer;font-size:14px;white-space:nowrap;min-width:0;overflow:hidden;" + ((s.view && s.view !== "new") ? "background:#DEDFE2;color:#1E2024;font-weight:500;" : "color:#35373D;"),
+      simplified: s.mode !== "classic",
+      classic: s.mode === "classic",
+      setClassic: () => this.setState({ mode: "classic" }),
+      setSimplified: () => this.setState({ mode: "simplified" }),
+      goChat: () => this.setState({ view: "chat", modal: null }),
+      draft: s.draft || "",
+      onDraft: e => this.setState({ draft: e.target.value }),
+      isReport: s.view === "report",
+      showSlack: s.view === "slack",
+      goAgents: e => { e.preventDefault(); this.setState({ view: "agents", modal: null }); },
+      goSlack: () => this.setState({ view: "slack" }),
+      goReport: () => this.setState({ view: "report" }),
+      skus: this.SKUS.map(([sku, name, price, carts, rate, err], i) => ({
+        sku, name, price, carts, rate, err,
+        rowStyle: "display:grid;grid-template-columns:1.1fr 2fr 0.8fr 0.8fr 1fr 1.1fr;gap:12px;padding:13px 18px;font-size:14px;align-items:center;" + (i ? "border-top:1px solid #DEDFE2;" : ""),
+        errStyle: err === "—" ? "font-size:12px;color:#8A8E99;" : "font-size:12px;font-weight:500;color:#D53943;"
+      })),
+      triage: this.TRIAGE.map(([title, body], i) => ({
+        n: i + 1, title, body,
+        dotStyle: "width:26px;height:26px;border-radius:50%;background:#EEF3FD;color:#0052F2;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex:0 0 26px;",
+        lineStyle: "flex:1;width:1px;background:" + (i === 3 ? "transparent" : "#DEDFE2") + ";margin:4px 0;"
+      })),
+      showWizard: s.modal === "cart",
+      showNotice: s.modal === "other",
+      openCart: () => {
+        this.setState({ view: "agents", modal: "cart", step: 1, mapping: false, scanning: true, fields: {}, customField: "", events: {} });
+        clearTimeout(this._scan);
+        this._scan = setTimeout(() => this.setState({ scanning: false }), 1800);
+      },
+      openOther: () => this.setState({ modal: "other" }),
+      close: () => this.setState({ modal: null }),
+      stop: e => e.stopPropagation(),
+      isMapping: mapping,
+      isScanning: scanning,
+      isStep0: step === 1 && !busy, isStep1: step === 2 && !busy, isStep2: step === 3 && !busy,
+      isStep3: step === 4 && !busy, isStep4: step === 5 && !busy, isStep5: step === 6 && !busy,
+      stepLabel: scanning ? "Scanning Amplitude…" : mapping ? "Mapping data…" : "Step " + step + " of 6 · " + labels[step - 1],
+      events: this.EVENTS.map(n => ({
+        name: n,
+        rowStyle: "display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:9px;cursor:pointer;border:1px solid " + (s.events[n] ? "#B5CEFD;background:#F7F9FD;" : "#DEDFE2;background:#fff;"),
+        boxStyle: chk(!!s.events[n]),
+        toggle: () => this.setState(p => ({ events: { ...p.events, [n]: !p.events[n] } }))
+      })),
+      bars: labels.map((l, i) => ({ style: "flex:1;height:4px;border-radius:999px;background:" + (i < step ? "#0052F2" : "#DEDFE2") })),
+
+      dataFields: this.FIELDS.map(n => ({
+        name: n,
+        rowStyle: "display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:9px;cursor:pointer;border:1px solid " + (s.fields[n] ? "#B5CEFD;background:#F7F9FD;" : "#DEDFE2;background:#fff;"),
+        boxStyle: chk(!!s.fields[n]),
+        toggle: () => this.setState(p => ({ fields: { ...p.fields, [n]: !p.fields[n] } }))
+      })),
+
+      mappings: this.MAP.map(([n, src, st], i) => ({
+        name: n, source: src === "—" ? "No source" : src,
+        rowStyle: "display:flex;align-items:center;gap:14px;padding:12px 16px;" + (i ? "border-top:1px solid #DEDFE2;" : "") + (st === "need" ? "background:#FDF1F2;" : ""),
+        sourceStyle: "font-size:12px;color:" + (st === "need" ? "#8A8E99" : "#35373D") + ";background:#F4F5F6;border-radius:999px;padding:4px 10px;",
+        statusStyle: "font-size:12px;font-weight:500;width:130px;text-align:right;color:" + (st === "need" ? "#D53943" : "#1D804E"),
+        status: st === "need" ? "Needs mapping" : "✓ Imported"
+      })),
+
+      sources: this.SRC.map(([n, d]) => {
+        const on = s.sources[n];
+        return {
+          name: n, desc: d,
+          rowStyle: "display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;border:1px solid " + (on ? "#B5CEFD;background:#F7F9FD;" : "#DEDFE2;background:#fff;"),
+          btnLabel: on ? "Connected" : "Connect",
+          btnStyle: "border-radius:8px;padding:7px 14px;font-size:12px;font-weight:500;cursor:pointer;" + (on ? "background:#DEF2E8;color:#1D804E;border:1px solid #DEF2E8;" : "background:#fff;color:#1E2024;border:1px solid #C2C4CA;"),
+          toggle: () => this.setState(p => ({ sources: { ...p.sources, [n]: !p.sources[n] } }))
+        };
+      }),
+
+      tasks: this.TASKS.map(([n, d]) => ({
+        name: n, desc: d,
+        rowStyle: "display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:10px;cursor:pointer;border:1px solid " + (s.tasks[n] ? "#B5CEFD;background:#F7F9FD;" : "#DEDFE2;background:#fff;"),
+        boxStyle: chk(!!s.tasks[n]) + "margin-top:2px;",
+        toggle: () => this.setState(p => ({ tasks: { ...p.tasks, [n]: !p.tasks[n] } }))
+      })),
+
+      customField: s.customField,
+      onCustomField: e => this.setState({ customField: e.target.value }),
+      summaryFields: "23 selected",
+      summarySources: "2 sources connected",
+      summaryTasks: Object.keys(s.tasks).filter(k => s.tasks[k]).length + " selected",
+
+      nextLabel: busy ? "Working…" : step === 1 ? "Use these events" : step === 5 ? "Finish setup" : step === 6 ? "Done" : "Continue",
+      next: () => {
+        if (busy) return;
+        if (step === 6) return this.setState({ modal: null, view: "slack" });
+        if (step === 2) {
+          this.setState({ mapping: true });
+          clearTimeout(this._t);
+          this._t = setTimeout(() => this.setState({ mapping: false, step: 3 }), 1800);
+          return;
+        }
+        this.setState({ step: step + 1 });
+      },
+      back: () => busy ? null : step === 1 ? this.setState({ modal: null }) : this.setState({ step: step - 1 }),
+      backStyle: "background:#fff;border:1px solid #C2C4CA;border-radius:8px;padding:10px 18px;font-size:14px;cursor:pointer;color:#1E2024;visibility:" + (step === 6 || busy ? "hidden" : "visible")
+      ,...this.agentVals(s)
+    };
+  }
+}
+</script>
+</body>
+</html>
