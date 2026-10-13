@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acme Store</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -53,10 +54,11 @@ button{font-family:inherit;}
   </aside>
 
   <main style="flex:1;min-width:0;background:#FFFFFF;border-radius:14px 0 0 14px;border:1px solid #DEDFE2;border-right:none;padding:26px 34px 60px;">
+    <sc-if value="{{ notChat }}">
     <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;">
       <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#8A8E99;min-width:0;overflow:hidden;white-space:nowrap;">
         <sc-if value="{{ isNew }}"><span style="display:inline-flex;align-items:center;gap:7px;color:#8A8E99;"><span style="width:22px;height:22px;flex:0 0 22px;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"></path></svg></span>Home</span></sc-if>
-        <sc-if value="{{ notNew }}"><a href="#" onClick="{{ goAgents }}" style="color:#8A8E99;display:inline-flex;align-items:center;gap:7px;"><sc-if value="{{ isPFO }}"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>{{ agentCrumb }}</a></sc-if>
+        <sc-if value="{{ notNew }}"><a href="#" onClick="{{ goAgents }}" style="color:#8A8E99;display:inline-flex;align-items:center;gap:7px;flex-shrink:0;"><sc-if value="{{ isPFO }}"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>{{ agentName }}</a></sc-if>
         <sc-if value="{{ isReport0 }}"><span>/</span><span style="color:#1E2024;min-width:0;overflow:hidden;text-overflow:ellipsis;">Fix in-stock Toys shown as "Not available" at checkout</span></sc-if>
         <sc-if value="{{ isReportX }}"><span>/</span><span style="color:#1E2024;min-width:0;overflow:hidden;text-overflow:ellipsis;">{{ opp.title }}</span></sc-if>
       </div>
@@ -77,15 +79,10 @@ button{font-family:inherit;}
           </sc-if>
         </div>
       </sc-if>
-      <sc-if value="{{ isChat }}">
-        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-          <button style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;flex-shrink:0;background:#fff;border:1px solid #C2C4CA;border-radius:8px;padding:7px 13px;font-size:12px;color:#1E2024;cursor:pointer;font-family:inherit;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5a6.5 6.5 0 0 1 3.5 5.5"></path></svg>Share</button>
-          <button onClick="{{ toggleSettings }}" style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;flex-shrink:0;background:#fff;border:1px solid #C2C4CA;border-radius:8px;padding:7px 13px;font-size:12px;color:#1E2024;cursor:pointer;font-family:inherit;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>Settings</button>
-          <button style="display:inline-flex;align-items:center;gap:7px;white-space:nowrap;flex-shrink:0;background:#0052F2;border:none;border-radius:8px;padding:8px 14px;font-size:12px;color:#fff;font-weight:500;cursor:pointer;font-family:inherit;" style-hover="background:#0C3FA7;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M10 8.5v7l5.5-3.5z"></path></svg>Run Now</button>
-        </div>
-      </sc-if>
+
       
     </div>
+    </sc-if>
 
     <sc-if value="{{ isNew }}" hint-placeholder-val="{{ true }}">
     <div style="max-width:760px;margin:0 auto;padding:72px 0 40px;display:flex;flex-direction:column;gap:26px;">
@@ -113,189 +110,352 @@ button{font-family:inherit;}
             <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Searches for "legos" return no results because plurals aren't matched</div>
             <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;"><span style="font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$19k/mo</span><span style="font-size:12px;color:#8A8E99;">est. impact</span></div>
           </div>
+        </div>
       </div>
-    </div>
     </div>
     </sc-if>
 
     <sc-if value="{{ isChat }}">
     <div style="position:fixed;right:20px;bottom:20px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
       <div style="display:flex;align-items:center;gap:4px;background:#fff;border:1px solid #DEDFE2;border-radius:999px;padding:4px;box-shadow:0 4px 16px rgba(30,32,36,0.10);">
-        <span style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;background:#1E2024;color:#fff;white-space:nowrap;text-decoration:none;">Option A</span>
-        <a href="chat.dc.html{{ agentHash }}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:#35373D;white-space:nowrap;text-decoration:none;cursor:pointer;" style-hover="background:#F4F5F6;">Option B</a>
-        <a href="home-c.dc.html{{ agentHash }}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:#35373D;white-space:nowrap;text-decoration:none;cursor:pointer;" style-hover="background:#F4F5F6;">Option C</a>
+        <a href="agent-option-a.dc.html{{ agentHash }}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:#35373D;white-space:nowrap;text-decoration:none;cursor:pointer;" style-hover="background:#F4F5F6;">Option A</a>
+        <span style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;background:#1E2024;color:#fff;white-space:nowrap;text-decoration:none;">Option B</span>
+        <a href="agent-option-c.dc.html{{ agentHash }}" style="padding:6px 14px;border-radius:999px;font-size:12px;font-weight:500;color:#35373D;white-space:nowrap;text-decoration:none;cursor:pointer;" style-hover="background:#F4F5F6;">Option C</a>
       </div>
     </div>
     </sc-if>
     <sc-if value="{{ isChat }}">
-    <div style="max-width:1360px;margin:0 auto;padding:36px 0 40px;display:flex;flex-direction:column;gap:24px;">
-      <div style="display:flex;justify-content:center;padding-top:16px;">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <sc-if value="{{ isPFO }}"><span style="width:44px;height:44px;flex:0 0 44px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:44px;height:44px;flex:0 0 44px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <h1 style="margin:0;font-size:24px;font-weight:500;letter-spacing:-0.02em;line-height:1.25;text-wrap:balance;">{{ agentTitle }}</h1>
+    <div style="{{ chatGridStyle }}">
+      <div style="display:flex;flex-direction:column;min-width:0;padding:20px 24px 24px;position:relative;">
+        <div style="position:absolute;top:20px;left:24px;z-index:20;">
+          <sc-if value="{{ chatsClosed }}" hint-placeholder-val="{{ true }}">
+            <span onClick="{{ toggleChats }}" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border-radius:999px;height:42px;box-sizing:border-box;padding:0 16px 0 12px;font-size:14px;font-weight:500;color:#1E2024;cursor:pointer;white-space:nowrap;box-shadow:0 2px 10px rgba(30,32,36,0.10);" style-hover="box-shadow:0 4px 14px rgba(30,32,36,0.14);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>Activities</span>
+          </sc-if>
+          <sc-if value="{{ chatsOpen }}">
+            <div style="width:340px;background:#fff;border:1px solid #DEDFE2;border-radius:16px;box-shadow:0 12px 32px rgba(30,32,36,0.14);padding:12px;display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="flex:1;min-width:0;display:flex;align-items:center;gap:8px;border:1px solid #C2C4CA;border-radius:999px;padding:8px 12px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+                  <input placeholder="Search" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+                </div>
+                <span onClick="{{ toggleChats }}" title="Close" style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#5A5E68;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
+              </div>
+              <sc-for list="{{ actDays }}" as="d" hint-placeholder-count="5">
+              <div onClick="{{ closeChats }}" style="{{ d.rowStyle }}" style-hover="background:#F4F5F6;"><span style="flex:1;min-width:0;line-height:1.4;text-wrap:pretty;">{{ d.desc }}</span><span style="flex-shrink:0;font-size:12px;font-weight:400;color:#8A8E99;white-space:nowrap;line-height:1.6;">{{ d.day }}</span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <span onClick="{{ togglePanel }}" style="{{ pillStyle }}" style-hover="background:#F4F5F6;"><sc-if value="{{ isPFO }}"><span style="width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:28px;height:28px;flex:0 0 28px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>{{ agentName }}</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:12px;padding:24px 0;max-width:760px;width:100%;margin:0 auto;">
+          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Today</div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">Here is today's update to your Opportunities and Goals</div>
+          <sc-if value="{{ isPFO }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+        <div onClick="{{ goReport }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="background:#FAE2E2;color:#B41823;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;">Spike detected</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Fix in-stock Toys shown as "Not available at checkout", which caused 45% to 60% spike in cart abandonment for the Toys category</div>
+                    <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+            <span style="font-family:Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$38k/mo</span>
+            <span style="font-size:12px;color:#8A8E99;">est. impact</span>
           </div>
         </div>
-
-      </div>
-      <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start;">
-      <div style="display:flex;flex-direction:column;gap:20px;min-width:0;">
-      <div style="width:100%;max-width:640px;margin:0 auto 16px;box-sizing:border-box;display:flex;align-items:center;gap:10px;border:1px solid #C2C4CA;border-radius:999px;background:#fff;padding:6px 6px 6px 8px;box-shadow:0 1px 3px rgba(16,18,21,0.04);">
-        <span title="Attach data" style="width:32px;height:32px;flex:0 0 32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#5A5E68;cursor:pointer;" style-hover="background:#F4F5F6;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>
-        <input value="{{ draft }}" onChange="{{ onDraft }}" placeholder="{{ agentPlaceholder }}" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
-        <button style="width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#0052F2;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:#0C3FA7;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-            <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #1E2024;border-radius:8px;padding:5px 11px;font-size:13px;font-weight:500;color:#1E2024;background:#fff;white-space:nowrap;cursor:pointer;" style-hover="background:#F4F5F6;">All<span style="color:#8A8E99;font-weight:400;">{{ cntAll }}</span></span>
-            <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #DEDFE2;border-radius:8px;padding:5px 11px;font-size:13px;font-weight:500;color:#1E2024;background:#fff;white-space:nowrap;cursor:pointer;" style-hover="background:#F4F5F6;"><span style="width:7px;height:7px;border-radius:50%;background:#D63C90;"></span>Triage<span style="color:#8A8E99;font-weight:400;">{{ cntTriage }}</span></span>
-            <div style="position:relative;">
-              <span onClick="{{ toggleMore }}" style="display:inline-flex;align-items:center;gap:6px;border:1px solid #DEDFE2;border-radius:8px;padding:5px 11px;font-size:13px;font-weight:500;color:#1E2024;background:#fff;white-space:nowrap;cursor:pointer;" style-hover="background:#F4F5F6;">More<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></span>
-              <sc-if value="{{ moreOpen }}">
-              <div style="position:absolute;left:0;top:calc(100% + 6px);z-index:30;background:#fff;border:1px solid #DEDFE2;border-radius:10px;box-shadow:0 8px 24px rgba(30,32,36,0.12);padding:6px;display:flex;flex-direction:column;min-width:200px;">
-                <div onClick="{{ closeMore }}" style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:13px;color:#1E2024;cursor:pointer;white-space:nowrap;" style-hover="background:#F4F5F6;"><span style="width:7px;height:7px;border-radius:50%;background:#0052F2;"></span><span style="flex:1;">Ready to Execute</span><span style="color:#8A8E99;">{{ cntReady }}</span></div>
-                <div onClick="{{ closeMore }}" style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:13px;color:#1E2024;cursor:pointer;white-space:nowrap;" style-hover="background:#F4F5F6;"><span style="width:7px;height:7px;border-radius:50%;background:#686CE9;"></span><span style="flex:1;">In Progress</span><span style="color:#8A8E99;">0</span></div>
-                <div onClick="{{ closeMore }}" style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:13px;color:#1E2024;cursor:pointer;white-space:nowrap;" style-hover="background:#F4F5F6;"><span style="width:7px;height:7px;border-radius:50%;background:#0E8A8A;"></span><span style="flex:1;">For Review</span><span style="color:#8A8E99;">0</span></div>
-                <div onClick="{{ closeMore }}" style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:13px;color:#1E2024;cursor:pointer;white-space:nowrap;" style-hover="background:#F4F5F6;"><span style="width:7px;height:7px;border-radius:50%;background:#1D804E;"></span><span style="flex:1;">Shipped</span><span style="color:#8A8E99;">0</span></div>
+        <div onClick="{{ goOpp6 }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="background:#EEF3FD;color:#0052F2;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;">A/B Testing</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Test free shipping vs. 10% off to determine which checkout offer drives the strongest overall lift in net revenue.</div>
+          <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+            <span style="font-family:Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$24k/mo</span>
+            <span style="font-size:12px;color:#8A8E99;">est. impact</span>
+          </div>
+        </div>
+        <div onClick="{{ goOpp4 }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="background:#DEDFF7;color:#474BC3;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;">Personalization</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">Personalize among free shipping, 10% off, loyalty points and no offer for each shopper.</div>
+          <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+            <span style="font-family:Inter,Arial,sans-serif;font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">+$41k/mo</span>
+            <span style="font-size:12px;color:#8A8E99;">est. impact</span>
+          </div>
+        </div>
+          </div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">{{ kpiSummary }}</div>
+          <div style="border:1px solid #DEDFE2;border-radius:12px;background:#fff;padding:16px 18px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px 16px;">
+              <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:4px;min-width:0;">
+                <div style="font-size:12px;color:#5A5E68;line-height:1.35;white-space:nowrap;">{{ k.l }}</div>
+                <div style="font-size:18px;font-weight:600;color:#1E2024;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;">{{ k.v }}</div>
+                <div style="{{ k.dStyle }}">{{ k.dl }}</div>
               </div>
-              </sc-if>
+              </sc-for>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:6px;">
-            <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #DEDFE2;border-radius:8px;padding:5px 11px;font-size:13px;color:#8A8E99;background:#fff;white-space:nowrap;width:160px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Search</span>
-            <span style="display:inline-flex;align-items:center;gap:7px;border:1px solid #DEDFE2;border-radius:8px;padding:5px 11px;font-size:13px;color:#1E2024;background:#fff;white-space:nowrap;cursor:pointer;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>Sort: Impact</span>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">Open each opportunity to see the evidence and plan, or ask me a follow-up.</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Where are we losing checkout conversions?</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Cart abandonment by SKU category</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Generate more opportunities</div>
+          </div>
+          </sc-if>
+          <sc-if value="{{ isPD }}">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ pdCards }}" as="c" hint-placeholder-count="3">
+            <div onClick="{{ c.go }}" style="border:1px solid #DEDFE2;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#fff;cursor:pointer;" style-hover="border-color:#C2C4CA;box-shadow:0 2px 8px rgba(30,32,36,0.06);">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                <span style="{{ c.badgeStyle }}">{{ c.badge }}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;flex-shrink:0;"><path d="M9 6l6 6-6 6"></path></svg>
+              </div>
+              <div style="font-size:14px;font-weight:500;line-height:1.5;color:#1E2024;text-wrap:pretty;">{{ c.title }}</div>
+              <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:12px;">
+                <span style="font-variant-numeric:tabular-nums;font-weight:500;color:#1D804E;">{{ c.impact }}</span>
+                <span style="font-size:12px;color:#8A8E99;">est. impact</span>
+              </div>
+            </div>
+            </sc-for>
+          </div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">{{ kpiSummary }}</div>
+          <div style="border:1px solid #DEDFE2;border-radius:12px;background:#fff;padding:16px 18px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px 16px;">
+              <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+              <div style="display:flex;flex-direction:column;gap:4px;min-width:0;">
+                <div style="font-size:12px;color:#5A5E68;line-height:1.35;white-space:nowrap;">{{ k.l }}</div>
+                <div style="font-size:18px;font-weight:600;color:#1E2024;font-variant-numeric:tabular-nums;letter-spacing:-0.01em;">{{ k.v }}</div>
+                <div style="{{ k.dStyle }}">{{ k.dl }}</div>
+              </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="align-self:flex-start;max-width:640px;background:#F4F5F6;border-radius:16px;padding:14px 18px;font-size:14px;line-height:1.6;color:#1E2024;text-wrap:pretty;">Open each opportunity to see the evidence and plan, or ask me a follow-up.</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Which searches return no results?</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Banner click-through this week</div>
+            <div style="border:1px solid #DEDFE2;border-radius:999px;padding:8px 15px;font-size:12px;color:#35373D;cursor:pointer;background:#fff;white-space:nowrap;" style-hover="background:#F4F5F6;">Generate more opportunities</div>
+          </div>
+          </sc-if>
+        </div>
+        <div style="position:sticky;bottom:16px;max-width:760px;width:100%;margin:0 auto;display:flex;align-items:center;gap:10px;border:1px solid #C2C4CA;border-radius:999px;background:#fff;padding:8px 8px 8px 10px;box-shadow:0 2px 10px rgba(30,32,36,0.06);">
+          <span style="width:34px;height:34px;border-radius:50%;border:1px solid #DEDFE2;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#35373D;flex:0 0 34px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></span>
+          <input value="{{ draft }}" onChange="{{ onDraft }}" placeholder="Message {{ agentName }}" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+          <button style="width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:#0052F2;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:#0C3FA7;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></button>
+        </div>
+      </div>
+      <sc-if value="{{ panelOpen }}">
+      <aside style="position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;min-width:0;border-left:1px solid #DEDFE2;background:#FFFFFF;padding:16px 24px 32px;display:flex;flex-direction:column;gap:22px;">
+        <span onClick="{{ togglePanel }}" title="Close" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid #DEDFE2;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#35373D;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
+          <sc-if value="{{ isPFO }}"><span style="width:72px;height:72px;flex:0 0 72px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span></sc-if><sc-if value="{{ isPD }}"><span style="width:72px;height:72px;flex:0 0 72px;border-radius:50%;background:#DEDFF7;display:flex;align-items:center;justify-content:center;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#686CE9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg></span></sc-if>
+          <div style="font-size:18px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin-top:6px;text-wrap:balance;">{{ agentName }}</div>
+          <div style="font-size:12px;color:#5A5E68;">By Jingshu Zhao · Monitors hourly</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5A5E68;">
+            <span style="display:flex;align-items:center;"><span style="width:24px;height:24px;border-radius:50%;background:#EEF3FD;color:#0052F2;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;">JZ</span><span style="width:24px;height:24px;border-radius:50%;background:#DEDFF7;color:#474BC3;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">MR</span><span style="width:24px;height:24px;border-radius:50%;background:#FAE2E2;color:#B41823;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">AK</span><span style="width:24px;height:24px;border-radius:50%;background:#DEDFE2;color:#5A5E68;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">+2</span></span>
+            <span>5 collaborators</span>
           </div>
         </div>
-        <sc-if value="{{ isPFO }}">
-        <div style="border:1px solid #DEDFE2;border-radius:12px;overflow:hidden;">
-          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:#F4F5F6;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-            <span style="font-size:14px;font-weight:500;color:#1E2024;">Fix</span>
-            <span style="font-size:13px;color:#8A8E99;">4</span>
-          </div>
-          <div onClick="{{ goOpp0 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Fix in-stock Toys shown as "Not available" at checkout</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$38k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#E0712B"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#E0712B"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#E0712B"></rect></svg>High</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #EEF3FD;background:#EEF3FD;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#0052F2;"></span>Ready to Execute</span></span>
-            <span style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:#EEF3FD;color:#0052F2;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;">JZ</span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 11</span>
-          </div>
-          <div onClick="{{ goOpp1 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Guest shoppers abandon twice as often at the account-creation prompt</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$22k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#0052F2"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#0052F2"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#C2C4CA"></rect></svg>Medium</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 9</span>
-          </div>
-          <div onClick="{{ goOpp2 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Shipping-step drop-off rose 8% on mobile Safari after the Sep 9 release</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$15k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#0052F2"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#0052F2"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#C2C4CA"></rect></svg>Medium</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 11</span>
-          </div>
-          <div onClick="{{ goOpp3 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Valid promo codes return "Invalid code" for 3.2% of checkouts</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$9k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#8A8E99"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#C2C4CA"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#C2C4CA"></rect></svg>Low</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 10</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:#F4F5F6;border-top:1px solid #DEDFE2;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-            <span style="font-size:14px;font-weight:500;color:#1E2024;">A/B Testing</span>
-            <span style="font-size:13px;color:#8A8E99;">3</span>
-          </div>
-          <div onClick="{{ goOpp6 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Test free shipping vs. 10% off to find the strongest lift in net revenue</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$24k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#0052F2"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#0052F2"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#C2C4CA"></rect></svg>Medium</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 11</span>
-          </div>
-          <div onClick="{{ goOpp7 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Test one-page vs. multi-step checkout for returning shoppers</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$18k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#0052F2"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#0052F2"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#C2C4CA"></rect></svg>Medium</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 10</span>
-          </div>
-          <div onClick="{{ goOpp8 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Test showing Apple Pay first on mobile checkout</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$7k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#8A8E99"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#C2C4CA"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#C2C4CA"></rect></svg>Low</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 9</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;padding:10px 16px;background:#F4F5F6;border-top:1px solid #DEDFE2;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-            <span style="font-size:14px;font-weight:500;color:#1E2024;">Personalization</span>
-            <span style="font-size:13px;color:#8A8E99;">2</span>
-          </div>
-          <div onClick="{{ goOpp4 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Personalize among free shipping, 10% off, loyalty points and no offer for each shopper</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$41k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#E0712B"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#E0712B"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#E0712B"></rect></svg>High</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 10</span>
-          </div>
-          <div onClick="{{ goOpp5 }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Personalize cart-page recommendations by category affinity</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">+$12k/mo</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="#8A8E99"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="#C2C4CA"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="#C2C4CA"></rect></svg>Low</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="display:inline-flex;align-items:center;gap:6px;border:1px solid #FCE8F2;background:#FCE8F2;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500;color:#1E2024;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#D63C90;"></span>Triage</span></span>
-            <span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">Sep 9</span>
-          </div>
+        <div style="display:flex;gap:2px;background:#F4F5F6;border-radius:999px;padding:4px;">
+            <sc-if value="{{ tabGoalOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">Goal</span></sc-if>
+            <sc-if value="{{ tabGoalOff }}"><span onClick="{{ setTabGoal }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">Goal</span></sc-if>
+            <sc-if value="{{ tabAboutOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">About</span></sc-if>
+            <sc-if value="{{ tabAboutOff }}"><span onClick="{{ setTabAbout }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">About</span></sc-if>
+            <sc-if value="{{ tabArtOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">Artifacts</span></sc-if>
+            <sc-if value="{{ tabArtOff }}"><span onClick="{{ setTabArt }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">Artifacts</span></sc-if>
         </div>
-        </sc-if>
-        <sc-if value="{{ isPD }}">
-        <div style="border:1px solid #DEDFE2;border-radius:12px;overflow:hidden;">
-          <sc-for list="{{ pdGroups }}" as="g" hint-placeholder-count="3">
-          <div style="{{ g.hdrStyle }}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A5E68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-            <span style="font-size:14px;font-weight:500;color:#1E2024;">{{ g.name }}</span>
-            <span style="font-size:13px;color:#8A8E99;">{{ g.count }}</span>
-          </div>
-          <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
-          <div onClick="{{ r.go }}" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid #DEDFE2;background:#fff;cursor:pointer;" style-hover="background:#F9FAFB;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8E99" stroke-width="1.6" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"></path></svg>
-            <span style="flex:1;min-width:120px;font-size:14px;font-weight:500;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.title }}</span>
-            <span style="flex:0 0 72px;text-align:right;font-size:13px;font-weight:500;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ r.impact }}</span>
-            <span style="flex:0 0 74px;display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#5A5E68;white-space:nowrap;"><svg width="12" height="12" viewBox="0 0 12 12" style="flex-shrink:0;"><rect x="1" y="7" width="2" height="4" rx="0.5" fill="{{ r.b1 }}"></rect><rect x="5" y="4" width="2" height="7" rx="0.5" fill="{{ r.b2 }}"></rect><rect x="9" y="1" width="2" height="10" rx="0.5" fill="{{ r.b3 }}"></rect></svg>{{ r.pri }}</span>
-            <span style="flex:0 0 132px;display:flex;justify-content:flex-start;"><span style="{{ r.pillStyle }}"><span style="{{ r.dotStyle }}"></span>{{ r.statusLabel }}</span></span>
-            <sc-if value="{{ r.hasWho }}"><span style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:#EEF3FD;color:#0052F2;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;">{{ r.who }}</span></sc-if>
-            <sc-if value="{{ r.noWho }}"><span title="Unassigned" style="width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px dashed #C2C4CA;display:flex;align-items:center;justify-content:center;color:#8A8E99;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span></sc-if>
-            <span style="flex:0 0 48px;text-align:right;font-size:13px;color:#5A5E68;white-space:nowrap;">{{ r.d }}</span>
+        <sc-if value="{{ tabGoalOn }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;color:#5A5E68;line-height:1.5;">{{ agentGoal }}</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#fff;border:1px solid #DEDFE2;border-radius:10px;">
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0;">
+              <div style="font-size:12px;color:#5A5E68;">{{ k.l }}</div>
+              <div style="{{ k.dStyle }}">{{ k.dl }}</div>
+            </div>
+            <div style="font-size:16px;font-weight:600;color:#1E2024;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ k.v }}</div>
           </div>
           </sc-for>
-          </sc-for>
+        </div>
         </div>
         </sc-if>
-      </div>
-      </div>
-      </div>
+        <sc-if value="{{ tabArtOn }}">
+        <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.a }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.as }}</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.b }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.bs }}</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.c }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.cs }}</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="4"></circle><circle cx="16" cy="15" r="4"></circle></svg></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.d }}</div>
+              <div style="font-size:12px;color:#8A8E99;">{{ art.ds }}</div>
+            </div>
+          </div>
+          <div style="padding:10px 8px;font-size:12px;font-weight:500;color:#0052F2;cursor:pointer;">View all 14 artifacts</div>
+        </div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ tabAboutOn }}">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Schedule</div>
+          <div style="font-size:14px;color:#35373D;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;"><span>Daily 9:00am PST</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Instruction</div>
+          <div style="font-size:14px;line-height:1.7;color:#35373D;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:12px 14px;text-wrap:pretty;"><sc-if value="{{ isPFO }}"><div style="display:flex;flex-direction:column;gap:8px;"><div>Find opportunities across the purchase funnel, from <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">View Product Detail</code> to <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Add to Cart</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Checkout</code> and <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Complete Purchase</code>.</div><div>Look for opportunities at the product level (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.category</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.item</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.id</code>), at the page level (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">page.url</code>), and in any feature related to the checkout flow.</div><div>Recommend fixes, experiments and personalization.</div><div>Send a daily update to the Slack channel <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">#funnel-tiger-team</code>.</div></div></sc-if><sc-if value="{{ isPD }}"><div style="display:flex;flex-direction:column;gap:8px;"><div>Monitor the goals and the purchase funnel, from <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">View Product Detail</code> to <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Add to Cart</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Checkout</code> and <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Complete Purchase</code>.</div><div>Find opportunities in search terms (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">search term</code>), homepage banners (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">banner</code>) and landing pages (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">entry page url</code>).</div><div>Identify the best ways for shoppers to discover a product and complete the purchase funnel, and recommend fixes, experiments and personalization.</div><div>Send a daily update to the Slack channel <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">#discovery-tiger-team</code>.</div></div></sc-if></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <div style="font-size:12px;font-weight:500;color:#8A8E99;">Skills</div>
+            <label title="Upload a skill file" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;color:#5A5E68;cursor:pointer;border-radius:6px;" style-hover="background:#F4F5F6;color:#1E2024;">
+              <input type="file" multiple accept=".md,.txt,.zip" onChange="{{ onSkills }}" style="display:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"></path></svg>
+            </label>
+          </div>
+          <sc-for list="{{ skills }}" as="k" hint-placeholder-count="0">
+            <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:10px 12px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path></svg>
+              <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ k.name }}</span>
+              <span onClick="{{ k.remove }}" title="Remove" style="width:24px;height:24px;flex:0 0 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#8A8E99;" style-hover="background:#F4F5F6;color:#1E2024;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
+            </div>
+          </sc-for>
+        </div>
+        </div>
+        </sc-if>
+      </aside>
+      </sc-if>
     </div>
     </sc-if>
 
+    <sc-if value="{{ isReportX }}">
+    <div style="max-width:840px;margin:0 auto;padding:40px 0 56px;display:flex;flex-direction:column;gap:44px;">
+      <div style="display:flex;flex-direction:column;gap:22px;padding-bottom:32px;border-bottom:1px solid #1E2024;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <span style="{{ opp.badgeStyle }}">{{ opp.badge }}</span>
+              <span style="font-size:12px;color:#8A8E99;white-space:nowrap;">{{ opp.when }}</span>
+            </div>
+            <h1 style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;text-wrap:balance;">{{ opp.title }}</h1>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:22px;">
+            <div style="font-size:32px;font-weight:600;letter-spacing:-0.02em;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ opp.impact }}</div>
+            <div style="font-size:12px;color:#5A5E68;white-space:nowrap;">{{ opp.impactLabel }}</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">{{ opp.problemTitle }}</h2>
+        <div style="display:grid;grid-template-columns:100px minmax(0,1fr);gap:20px 16px;font-size:16px;line-height:1.55;">
+          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">What</span>
+          <span style="color:#1E2024;text-wrap:pretty;">{{ opp.what }}</span>
+          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">Why</span>
+          <span style="color:#1E2024;text-wrap:pretty;">{{ opp.why }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <span onClick="{{ toggleEvidence }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#0052F2;cursor:pointer;white-space:nowrap;">
+            <sc-if value="{{ evidenceClosed }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></sc-if>
+            <sc-if value="{{ evidenceOpen }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></sc-if>
+            {{ opp.checksLabel }}
+          </span>
+          <sc-if value="{{ evidenceOpen }}">
+            <div style="display:flex;flex-direction:column;border-top:1px solid #DEDFE2;">
+              <sc-for list="{{ opp.checks }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;color:#1E2024;">
+                  <span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEF2E8;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1D804E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
+                  <span style="flex:1;min-width:0;line-height:1.5;">{{ c.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <sc-if value="{{ opp.hasKV }}">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Test design</h2>
+        <div style="display:flex;flex-direction:column;border-top:1px solid #DEDFE2;">
+          <sc-for list="{{ opp.kv }}" as="r" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;line-height:1.5;">
+              <span style="color:#5A5E68;">{{ r.k }}</span>
+              <span style="color:#1E2024;text-wrap:pretty;">{{ r.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+      <sc-if value="{{ opp.hasTable }}">
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">{{ opp.tableTitle }}</h2>
+        <div style="border:1px solid #DEDFE2;border-radius:10px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:2fr 0.8fr 2fr 1fr;gap:12px;padding:10px 18px;background:#F4F5F6;border-bottom:1px solid #DEDFE2;font-size:12px;color:#8A8E99;">
+            <span>{{ opp.cols.a }}</span><span>{{ opp.cols.b }}</span><span>{{ opp.cols.c }}</span><span style="text-align:right;">{{ opp.cols.d }}</span>
+          </div>
+          <sc-for list="{{ opp.rows }}" as="r" hint-placeholder-count="4">
+            <div style="{{ r.rowStyle }}">
+              <span style="color:#1E2024;">{{ r.a }}</span>
+              <span style="color:#5A5E68;font-variant-numeric:tabular-nums;">{{ r.b }}</span>
+              <span style="color:#1E2024;font-weight:500;">{{ r.c }}</span>
+              <span style="color:#1D804E;font-weight:500;text-align:right;font-variant-numeric:tabular-nums;">{{ r.d }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Plan</h2>
+        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px;font-size:16px;line-height:1.5;color:#1E2024;">
+          <sc-for list="{{ opp.plan }}" as="p" hint-placeholder-count="3"><li>{{ p.text }}</li></sc-for>
+        </ol>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;">
+          <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Activity</h2>
+          <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">1 update</span>
+        </div>
+        <div style="display:flex;flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:14px;padding-bottom:22px;position:relative;">
+            <span style="position:absolute;left:15px;top:32px;bottom:0;width:1px;background:#DEDFE2;"></span>
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span>
+            <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;">{{ opp.agentLabel }} posted this to #ecom-alerts</span>
+            <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">{{ opp.posted }}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#F4F5F6;color:#5A5E68;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">JZ</span>
+            <div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid #DEDFE2;border-radius:10px;background:#fff;padding:8px 8px 8px 16px;">
+              <input placeholder="Comment or @mention a teammate…" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
+              <span style="width:30px;height:30px;flex:0 0 30px;border-radius:7px;background:#F4F5F6;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
     <sc-if value="{{ isReport0 }}">
     <div style="max-width:840px;margin:0 auto;padding:40px 0 56px;display:flex;flex-direction:column;gap:44px;">
       <div style="display:flex;flex-direction:column;gap:22px;padding-bottom:32px;border-bottom:1px solid #1E2024;">
@@ -408,210 +568,7 @@ button{font-family:inherit;}
       </div>
     </div>
     </sc-if>
-    <sc-if value="{{ isReportX }}">
-    <div style="max-width:840px;margin:0 auto;padding:40px 0 56px;display:flex;flex-direction:column;gap:44px;">
-      <div style="display:flex;flex-direction:column;gap:22px;padding-bottom:32px;border-bottom:1px solid #1E2024;">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-          <div style="flex:1;min-width:280px;display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <span style="{{ opp.badgeStyle }}">{{ opp.badge }}</span>
-              <span style="font-size:12px;color:#8A8E99;white-space:nowrap;">{{ opp.when }}</span>
-            </div>
-            <h1 style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;text-wrap:balance;">{{ opp.title }}</h1>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:22px;">
-            <div style="font-size:32px;font-weight:600;letter-spacing:-0.02em;color:#1D804E;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ opp.impact }}</div>
-            <div style="font-size:12px;color:#5A5E68;white-space:nowrap;">{{ opp.impactLabel }}</div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:20px;">
-        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">{{ opp.problemTitle }}</h2>
-        <div style="display:grid;grid-template-columns:100px minmax(0,1fr);gap:20px 16px;font-size:16px;line-height:1.55;">
-          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">What</span>
-          <span style="color:#1E2024;text-wrap:pretty;">{{ opp.what }}</span>
-          <span style="font-size:14px;color:#5A5E68;padding-top:2px;">Why</span>
-          <span style="color:#1E2024;text-wrap:pretty;">{{ opp.why }}</span>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <span onClick="{{ toggleEvidence }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#0052F2;cursor:pointer;white-space:nowrap;">
-            <sc-if value="{{ evidenceClosed }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></sc-if>
-            <sc-if value="{{ evidenceOpen }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></sc-if>
-            {{ opp.checksLabel }}
-          </span>
-          <sc-if value="{{ evidenceOpen }}">
-            <div style="display:flex;flex-direction:column;border-top:1px solid #DEDFE2;">
-              <sc-for list="{{ opp.checks }}" as="c" hint-placeholder-count="4">
-                <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;color:#1E2024;">
-                  <span style="width:22px;height:22px;flex:0 0 22px;border-radius:50%;background:#DEF2E8;display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1D804E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg></span>
-                  <span style="flex:1;min-width:0;line-height:1.5;">{{ c.text }}</span>
-                </div>
-              </sc-for>
-            </div>
-          </sc-if>
-        </div>
-      </div>
-      <sc-if value="{{ opp.hasKV }}">
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Test design</h2>
-        <div style="display:flex;flex-direction:column;border-top:1px solid #DEDFE2;">
-          <sc-for list="{{ opp.kv }}" as="r" hint-placeholder-count="5">
-            <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid #DEDFE2;font-size:14px;line-height:1.5;">
-              <span style="color:#5A5E68;">{{ r.k }}</span>
-              <span style="color:#1E2024;text-wrap:pretty;">{{ r.v }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      </sc-if>
-      <sc-if value="{{ opp.hasTable }}">
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">{{ opp.tableTitle }}</h2>
-        <div style="border:1px solid #DEDFE2;border-radius:10px;overflow:hidden;">
-          <div style="display:grid;grid-template-columns:2fr 0.8fr 2fr 1fr;gap:12px;padding:10px 18px;background:#F4F5F6;border-bottom:1px solid #DEDFE2;font-size:12px;color:#8A8E99;">
-            <span>{{ opp.cols.a }}</span><span>{{ opp.cols.b }}</span><span>{{ opp.cols.c }}</span><span style="text-align:right;">{{ opp.cols.d }}</span>
-          </div>
-          <sc-for list="{{ opp.rows }}" as="r" hint-placeholder-count="4">
-            <div style="{{ r.rowStyle }}">
-              <span style="color:#1E2024;">{{ r.a }}</span>
-              <span style="color:#5A5E68;font-variant-numeric:tabular-nums;">{{ r.b }}</span>
-              <span style="color:#1E2024;font-weight:500;">{{ r.c }}</span>
-              <span style="color:#1D804E;font-weight:500;text-align:right;font-variant-numeric:tabular-nums;">{{ r.d }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      </sc-if>
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Plan</h2>
-        <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px;font-size:16px;line-height:1.5;color:#1E2024;">
-          <sc-for list="{{ opp.plan }}" as="p" hint-placeholder-count="3"><li>{{ p.text }}</li></sc-for>
-        </ol>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;">
-          <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-0.01em;color:#1E2024;">Activity</h2>
-          <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">1 update</span>
-        </div>
-        <div style="display:flex;flex-direction:column;">
-          <div style="display:flex;align-items:center;gap:14px;padding-bottom:22px;position:relative;">
-            <span style="position:absolute;left:15px;top:32px;bottom:0;width:1px;background:#DEDFE2;"></span>
-            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#EEF3FD;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0052F2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle><path d="M2 3h3l2.6 12h11L21 7H6"></path></svg></span>
-            <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;">{{ opp.agentLabel }} posted this to #ecom-alerts</span>
-            <span style="font-size:14px;color:#8A8E99;white-space:nowrap;">{{ opp.posted }}</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:14px;">
-            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:50%;background:#F4F5F6;color:#5A5E68;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;">JZ</span>
-            <div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid #DEDFE2;border-radius:10px;background:#fff;padding:8px 8px 8px 16px;">
-              <input placeholder="Comment or @mention a teammate…" style="flex:1;min-width:0;border:none;outline:none;font-family:inherit;font-size:14px;color:#1E2024;background:transparent;">
-              <span style="width:30px;height:30px;flex:0 0 30px;border-radius:7px;background:#F4F5F6;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </sc-if>
   </main>
-  <sc-if value="{{ settingsPanel }}">
-      <aside style="position:sticky;top:0;align-self:flex-start;height:100vh;overflow-y:auto;min-width:0;flex:0 1 min(340px,32%);min-width:260px;box-sizing:border-box;border-left:1px solid #DEDFE2;background:#FFFFFF;padding:16px 24px 32px;display:flex;flex-direction:column;gap:22px;">
-        <span onClick="{{ toggleSettings }}" title="Close" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid #DEDFE2;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#35373D;" style-hover="background:#F4F5F6;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;">
-          <div style="font-size:18px;font-weight:600;letter-spacing:-0.01em;line-height:1.3;margin-top:24px;text-wrap:balance;">{{ agentName }}</div>
-          <div style="font-size:12px;color:#5A5E68;">By Jingshu Zhao · Monitors hourly</div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#5A5E68;">
-            <span style="display:flex;align-items:center;"><span style="width:24px;height:24px;border-radius:50%;background:#EEF3FD;color:#0052F2;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;">JZ</span><span style="width:24px;height:24px;border-radius:50%;background:#DEDFF7;color:#474BC3;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">MR</span><span style="width:24px;height:24px;border-radius:50%;background:#FAE2E2;color:#B41823;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">AK</span><span style="width:24px;height:24px;border-radius:50%;background:#DEDFE2;color:#5A5E68;border:2px solid #FFFFFF;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;margin-left:-7px;">+2</span></span>
-            <span>5 collaborators</span>
-          </div>
-        </div>
-        <div style="display:flex;gap:2px;background:#F4F5F6;border-radius:999px;padding:4px;">
-            <sc-if value="{{ tabGoalOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">Goal</span></sc-if>
-            <sc-if value="{{ tabGoalOff }}"><span onClick="{{ setTabGoal }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">Goal</span></sc-if>
-            <sc-if value="{{ tabAboutOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">About</span></sc-if>
-            <sc-if value="{{ tabAboutOff }}"><span onClick="{{ setTabAbout }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">About</span></sc-if>
-            <sc-if value="{{ tabArtOn }}"><span style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:500;background:#fff;color:#1E2024;box-shadow:0 1px 2px rgba(30,32,36,0.08);white-space:nowrap;">Artifacts</span></sc-if>
-            <sc-if value="{{ tabArtOff }}"><span onClick="{{ setTabArt }}" style="flex:1;text-align:center;padding:6px 8px;border-radius:999px;font-size:12px;color:#5A5E68;cursor:pointer;white-space:nowrap;">Artifacts</span></sc-if>
-        </div>
-        <sc-if value="{{ tabGoalOn }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="font-size:12px;color:#5A5E68;line-height:1.5;">{{ agentGoal }}</div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#fff;border:1px solid #DEDFE2;border-radius:10px;">
-            <div style="display:flex;flex-direction:column;gap:2px;min-width:0;">
-              <div style="font-size:12px;color:#5A5E68;">{{ k.l }}</div>
-              <div style="{{ k.dStyle }}">{{ k.dl }}</div>
-            </div>
-            <div style="font-size:16px;font-weight:600;color:#1E2024;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ k.v }}</div>
-          </div>
-          </sc-for>
-        </div>
-        </div>
-        </sc-if>
-        <sc-if value="{{ tabArtOn }}">
-        <div style="display:flex;flex-direction:column;gap:4px;">
-        <div style="display:flex;flex-direction:column;">
-          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
-            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg></span>
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
-              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.a }}</div>
-              <div style="font-size:12px;color:#8A8E99;">{{ art.as }}</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
-            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg></span>
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
-              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.b }}</div>
-              <div style="font-size:12px;color:#8A8E99;">{{ art.bs }}</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
-            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
-              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.c }}</div>
-              <div style="font-size:12px;color:#8A8E99;">{{ art.cs }}</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:8px;cursor:pointer;" style-hover="background:#fff;">
-            <span style="width:30px;height:30px;flex:0 0 30px;border-radius:8px;background:#fff;border:1px solid #DEDFE2;display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="4"></circle><circle cx="16" cy="15" r="4"></circle></svg></span>
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
-              <div style="font-size:14px;font-weight:500;color:#1E2024;">{{ art.d }}</div>
-              <div style="font-size:12px;color:#8A8E99;">{{ art.ds }}</div>
-            </div>
-          </div>
-          <div style="padding:10px 8px;font-size:12px;font-weight:500;color:#0052F2;cursor:pointer;">View all 14 artifacts</div>
-        </div>
-        </div>
-        </sc-if>
-        <sc-if value="{{ tabAboutOn }}">
-        <div style="display:flex;flex-direction:column;gap:16px;">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Schedule</div>
-          <div style="font-size:14px;color:#35373D;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;"><span>Daily 9:00am PST</span></div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="font-size:12px;font-weight:500;color:#8A8E99;">Instruction</div>
-          <div style="font-size:14px;line-height:1.7;color:#35373D;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:12px 14px;text-wrap:pretty;"><sc-if value="{{ isPFO }}"><div style="display:flex;flex-direction:column;gap:8px;"><div>Find opportunities across the purchase funnel, from <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">View Product Detail</code> to <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Add to Cart</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Checkout</code> and <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Complete Purchase</code>.</div><div>Look for opportunities at the product level (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.category</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.item</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">product.id</code>), at the page level (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">page.url</code>), and in any feature related to the checkout flow.</div><div>Recommend fixes, experiments and personalization.</div><div>Send a daily update to the Slack channel <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">#funnel-tiger-team</code>.</div></div></sc-if><sc-if value="{{ isPD }}"><div style="display:flex;flex-direction:column;gap:8px;"><div>Monitor the goals and the purchase funnel, from <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">View Product Detail</code> to <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Add to Cart</code>, <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Checkout</code> and <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">Complete Purchase</code>.</div><div>Find opportunities in search terms (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">search term</code>), homepage banners (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">banner</code>) and landing pages (<code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">entry page url</code>).</div><div>Identify the best ways for shoppers to discover a product and complete the purchase funnel, and recommend fixes, experiments and personalization.</div><div>Send a daily update to the Slack channel <code style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#F4F5F6;border:1px solid #DEDFE2;border-radius:4px;padding:1px 5px;color:#1E2024;white-space:nowrap;">#discovery-tiger-team</code>.</div></div></sc-if></div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-            <div style="font-size:12px;font-weight:500;color:#8A8E99;">Skills</div>
-            <label title="Upload a skill file" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;color:#5A5E68;cursor:pointer;border-radius:6px;" style-hover="background:#F4F5F6;color:#1E2024;">
-              <input type="file" multiple accept=".md,.txt,.zip" onChange="{{ onSkills }}" style="display:none;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"></path></svg>
-            </label>
-          </div>
-          <sc-for list="{{ skills }}" as="k" hint-placeholder-count="0">
-            <div style="display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #DEDFE2;border-radius:10px;padding:10px 12px;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#35373D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path></svg>
-              <span style="flex:1;min-width:0;font-size:14px;color:#1E2024;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ k.name }}</span>
-              <span onClick="{{ k.remove }}" title="Remove" style="width:24px;height:24px;flex:0 0 24px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#8A8E99;" style-hover="background:#F4F5F6;color:#1E2024;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></span>
-            </div>
-          </sc-for>
-        </div>
-        </div>
-        </sc-if>
-      </aside>
-  </sc-if>
 
   <sc-if value="{{ showSlack }}">
     <div style="position:fixed;inset:0;z-index:60;background:#1A1D21;display:flex;flex-direction:column;animation:ovIn 200ms ease-out;">
@@ -1006,6 +963,8 @@ class Component extends DCLogic {
     const out = {
       skills: [...((s.hideSkill || {})[pd ? "pd" : "pfo"] ? [] : [{ name: pd ? "product-discovery-agent.md" : "purchase-funnel-optimizer.md", remove: () => this.setState(p => ({ hideSkill: { ...(p.hideSkill || {}), [pd ? "pd" : "pfo"]: true } })) }]), ...(s.skills || []).map((name, i) => ({ name, remove: () => this.setState(p => ({ skills: (p.skills || []).filter((_, j) => j !== i) })) }))],
       onSkills: e => { const names = Array.from((e.target && e.target.files) || []).map(f => f.name); if (names.length) this.setState(p => ({ skills: [...(p.skills || []), ...names] })); try { e.target.value = ""; } catch (x) {} },
+      actDays: (pd ? ["Zero-result searches and holiday banner test", "Sold-out banner and autocomplete test", "Slow Halloween page and Toys carousel test", "Search conversion steady at 63%", "Weekly discovery summary"] : ["Toys checkout spike and free shipping test", "Promo code errors and offer personalization", "Guest checkout drop-off and Apple Pay test", "Abandonment steady at 48%", "Weekly cart health summary"]).map((desc, i) => ({ desc, day: ["Today", "Yesterday", "Wed, Sep 9", "Tue, Sep 8", "Mon, Sep 7"][i], rowStyle: "display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:10px;font-size:14px;color:#1E2024;cursor:pointer;" + (i ? "" : "background:#F4F5F6;font-weight:500;") })),
+      kpiSummary: pd ? "Conversion slipped to 3.2% this week and total revenue is down 3%. Rising zero-result searches are a likely driver." : "Cart abandonment rose 4.1 pts this week and conversion slipped to 3.2%, so total revenue is down 3%.",
       isPFO: !pd, isPD: pd, agentName: Ag.name, agentTitle: Ag.title, agentCrumb: Ag.crumb, agentGoal: Ag.goal, agentAbout: Ag.about, agentPlaceholder: Ag.placeholder,
       agentHash: pd ? "#pd" : "#chat", cntAll: Ag.counts[0], cntTriage: Ag.counts[1], cntReady: Ag.counts[2],
       kpis: Ag.kpis.map(([l, dl, good, v]) => ({ l, dl, v, dStyle: "font-size:12px;font-weight:500;color:" + (good ? "#1D804E" : "#D53943") + ";" })),
@@ -1040,11 +999,16 @@ class Component extends DCLogic {
       isNew: !s.view || s.view === "new",
       notNew: !!s.view && s.view !== "new",
       isChat: s.view === "chat" || s.view === "agents",
-      settingsPanel: !!s.settingsOpen && (s.view === "chat" || s.view === "agents"),
-      toggleSettings: () => this.setState(p => ({ settingsOpen: !p.settingsOpen })),
-      tabGoalOn: (s.ptab || "goal") === "goal", tabGoalOff: (s.ptab || "goal") !== "goal", setTabGoal: () => this.setState({ ptab: "goal" }),
-      tabArtOn: s.ptab === "art", tabArtOff: s.ptab !== "art", setTabArt: () => this.setState({ ptab: "art" }),
-      tabAboutOn: s.ptab === "about", tabAboutOff: s.ptab !== "about", setTabAbout: () => this.setState({ ptab: "about" }),
+      fbOpen: !!s.fbOpen, fbSent: !!s.fbSent, fbNotSent: !s.fbSent, fbText: s.fbText || "",
+      toggleFb: () => this.setState(p => ({ fbOpen: !p.fbOpen, fbSent: false })),
+      onFb: e => this.setState({ fbText: e.target.value }),
+      sendFb: () => { try { const k = "va-feedback"; const l = JSON.parse(localStorage.getItem(k) || "[]"); l.push({ option: "A", text: s.fbText || "", at: new Date().toISOString() }); localStorage.setItem(k, JSON.stringify(l)); } catch (e) {} this.setState({ fbSent: true, fbText: "" }); setTimeout(() => this.setState({ fbOpen: false, fbSent: false }), 1600); },
+      notChat: !(s.view === "chat" || s.view === "agents"),
+      panelOpen: !!s.panelOpen,
+      chatsOpen: !!s.chatsOpen,
+      chatsClosed: !s.chatsOpen,
+      toggleChats: () => this.setState(p => ({ chatsOpen: !p.chatsOpen })),
+      closeChats: () => this.setState({ chatsOpen: false }),
       actionOpen: !!s.actionOpen,
       toggleAction: () => this.setState(p => ({ actionOpen: !p.actionOpen })),
       closeAction: () => this.setState({ actionOpen: false }),
@@ -1053,13 +1017,12 @@ class Component extends DCLogic {
       evidenceClosed: !s.evidenceOpen,
       toggleEvidence: () => this.setState(p => ({ evidenceOpen: !p.evidenceOpen })),
       toggleSkus: e => { e && e.preventDefault(); this.setState(p => ({ showSkus: !p.showSkus })); },
-      feedMoreOpen: !!s.feedMoreOpen,
-      feedMoreClosed: !s.feedMoreOpen,
-      toggleFeedMore: () => this.setState(p => ({ feedMoreOpen: !p.feedMoreOpen })),
-      fbOpen: !!s.fbOpen, fbSent: !!s.fbSent, fbNotSent: !s.fbSent, fbText: s.fbText || "",
-      toggleFb: () => this.setState(p => ({ fbOpen: !p.fbOpen, fbSent: false })),
-      onFb: e => this.setState({ fbText: e.target.value }),
-      sendFb: () => { try { const k = "va-feedback"; const l = JSON.parse(localStorage.getItem(k) || "[]"); l.push({ option: "B", text: s.fbText || "", at: new Date().toISOString() }); localStorage.setItem(k, JSON.stringify(l)); } catch (e) {} this.setState({ fbSent: true, fbText: "" }); setTimeout(() => this.setState({ fbOpen: false, fbSent: false }), 1600); },
+      togglePanel: () => this.setState(p => ({ panelOpen: !p.panelOpen })),
+      chatGridStyle: "display:grid;grid-template-columns:" + (s.panelOpen ? "minmax(0,1fr) min(440px,45%)" : "minmax(0,1fr)") + ";gap:0;margin:-26px -34px -60px;min-height:100vh;",
+      pillStyle: "display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:6px 16px 6px 6px;font-size:14px;font-weight:500;background:#fff;white-space:nowrap;cursor:pointer;border:1px solid #DEDFE2;",
+      tabGoalOn: (s.ptab || "goal") === "goal", tabGoalOff: (s.ptab || "goal") !== "goal", setTabGoal: () => this.setState({ ptab: "goal" }),
+      tabArtOn: s.ptab === "art", tabArtOff: s.ptab !== "art", setTabArt: () => this.setState({ ptab: "art" }),
+      tabAboutOn: s.ptab === "about", tabAboutOff: s.ptab !== "about", setTabAbout: () => this.setState({ ptab: "about" }),
       goNew: () => this.setState({ view: "new", modal: null }),
       goCart: () => this.setState({ view: "chat", modal: null }),
       newNavStyle: "display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:9px;cursor:pointer;font-size:14px;white-space:nowrap;" + ((!s.view || s.view === "new") ? "background:#DEDFE2;color:#1E2024;font-weight:500;" : "color:#35373D;"),
@@ -1075,38 +1038,7 @@ class Component extends DCLogic {
       showSlack: s.view === "slack",
       goAgents: e => { e.preventDefault(); this.setState({ view: "agents", modal: null }); },
       goSlack: () => this.setState({ view: "slack" }),
-      goReport: () => this.openOpp(0),
-      isReport: s.view === "report",
-      moreOpen: !!s.moreOpen,
-      toggleMore: () => this.setState(p => ({ moreOpen: !p.moreOpen })),
-      closeMore: () => this.setState({ moreOpen: false }),
-      isFixAction: s.view === "report" && (s.opp || 0) < 4,
-      isLaunch: s.view === "report" && (s.opp || 0) >= 4,
-      launched: !!(s.launched || {})[s.opp],
-      notLaunched: !(s.launched || {})[s.opp],
-      launchLabel: (s.opp || 0) >= 6 ? "Launch A/B test" : "Roll out personalization",
-      launchedLabel: (s.opp || 0) >= 6 ? "A/B test running" : "Personalization live",
-      doLaunch: () => this.setState(p => ({ launched: { ...(p.launched || {}), [p.opp]: true } })),
-      isReport0: s.view === "report" && !s.opp,
-      isReportX: s.view === "report" && !!s.opp,
-      goOpp0: () => this.openOpp(0), goOpp1: () => this.openOpp(1), goOpp2: () => this.openOpp(2),
-      goOpp3: () => this.openOpp(3), goOpp4: () => this.openOpp(4), goOpp5: () => this.openOpp(5),
-      goOpp6: () => this.openOpp(6), goOpp7: () => this.openOpp(7), goOpp8: () => this.openOpp(8),
-      opp: (() => {
-        const o = this.OPPS[s.opp] || this.OPPS[1];
-        const tones = { red: "#FAE2E2;color:#B41823", lilac: "#DEDFF7;color:#474BC3", blue: "#EEF3FD;color:#0052F2" };
-        return {
-          ...o,
-          problemTitle: o.problemTitle || "Problem",
-          badgeStyle: "background:" + tones[o.tone] + ";border-radius:999px;padding:4px 10px;font-size:12px;font-weight:500;white-space:nowrap;",
-          checksLabel: "How we know · " + o.checks.length + " checks",
-          checks: o.checks.map(text => ({ text })),
-          plan: o.plan.map(text => ({ text })),
-          hasKV: !!o.kv, kv: (o.kv || []).map(([k, v]) => ({ k, v })),
-          hasTable: !!o.rows, cols: o.cols || {},
-          rows: (o.rows || []).map(([a, b, c, d], i) => ({ a, b, c, d, rowStyle: "display:grid;grid-template-columns:2fr 0.8fr 2fr 1fr;gap:12px;padding:13px 18px;font-size:14px;align-items:center;" + (i ? "border-top:1px solid #DEDFE2;" : "") }))
-        };
-      })(),
+      goReport: () => this.setState({ view: "report" }),
       skus: this.SKUS.map(([sku, name, price, carts, rate, err], i) => ({
         sku, name, price, carts, rate, err,
         rowStyle: "display:grid;grid-template-columns:1.1fr 2fr 0.8fr 0.8fr 1fr 1.1fr;gap:12px;padding:13px 18px;font-size:14px;align-items:center;" + (i ? "border-top:1px solid #DEDFE2;" : ""),
